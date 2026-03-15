@@ -1,63 +1,92 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { OptimizedVideo } from '../lib/utils';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ChevronRight } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Hero = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.hero-line', {
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: 'power4.out',
+        delay: 0.5
+      });
+
+      gsap.from('.hero-cta', {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1,
+        ease: 'back.out(1.7)',
+        delay: 1.2
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-      {/* Background Video with Magazine Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-black/50 z-10" />
-        <OptimizedVideo 
-          src="/videos/berg-adidas.mp4" 
-          className="scale-105 transition-transform duration-700 hover:scale-100"
-        />
-      </div>
+    <section 
+      ref={containerRef}
+      className="relative h-[100dvh] w-full overflow-hidden bg-[#0D0D12]"
+    >
+      {/* Editorial Background Image */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-[3s] hover:scale-105"
+        style={{ 
+          backgroundImage: 'url("https://images.unsplash.com/photo-1552072805-2a9039d00e57?q=80&w=2574&auto=format&fit=crop")',
+          filter: 'brightness(0.3) contrast(1.1)'
+        }}
+      />
+      
+      {/* Voids Overlay */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0D0D12] via-transparent to-transparent opacity-80" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#0D0D12]/60 via-transparent to-transparent" />
 
-      {/* Grid Pattern */}
-      <div className="grid-background" />
+      {/* Content Container */}
+      <div className="relative z-20 h-full max-w-7xl mx-auto px-6 flex flex-col justify-end pb-32">
+        <div ref={textRef} className="max-w-3xl">
+          <div className="hero-line overflow-hidden mb-4">
+            <span className="inline-block text-[10px] md:text-xs font-data font-black uppercase tracking-[0.5em] text-[#C9A84C]">
+              Elite Performance Protocol
+            </span>
+          </div>
+          
+          <h1 className="hero-line block text-5xl md:text-8xl font-black uppercase italic tracking-tighter leading-[0.8] mb-6">
+            Domínio <br />
+            <span className="font-drama text-[#FAF8F5] text-6xl md:text-9xl ml-[-0.05em]">Absoluto.</span>
+          </h1>
 
-      {/* Content */}
-      <div className="relative z-20 text-center px-4">
-        <motion.span 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-accent-blue font-bold tracking-[0.3em] uppercase mb-4 block"
-        >
-          World Champion
-        </motion.span>
-        
-        <motion.h1 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-8"
-        >
-          Gutemberg <br /> Pereira
-        </motion.h1>
+          <p className="hero-line text-white/40 text-sm md:text-base uppercase tracking-widest max-w-md mb-12 font-medium">
+            A metodologia que transformou o Jiu-Jitsu competitivo em uma forma de arte técnica e pressão implacável.
+          </p>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <button className="btn-epic">
-            Quero Me Tornar Imbatível
-          </button>
-        </motion.div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div 
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
-      >
-        <div className="w-[1px] h-12 bg-white/20 relative">
-          <div className="absolute top-0 left-0 w-full h-1/2 bg-white" />
+          <div className="hero-cta flex flex-wrap gap-4">
+            <a href="#courses" className="btn-magnetic btn-primary px-10 py-5">
+              <span>Iniciar Jornada</span>
+              <ChevronRight size={14} />
+            </a>
+            <a href="#about" className="btn-magnetic btn-secondary px-8 py-5">
+              <span>Ver Manifesto</span>
+            </a>
+          </div>
         </div>
-      </motion.div>
+      </div>
+
+      {/* Aesthetic Side Stripes */}
+      <div className="absolute bottom-12 right-12 z-20 hidden md:flex flex-col gap-2 opacity-20">
+        <div className="h-[1px] w-24 bg-white" />
+        <div className="h-[1px] w-16 bg-white ml-auto" />
+        <div className="h-[1px] w-32 bg-white ml-auto" />
+      </div>
     </section>
   );
 };
