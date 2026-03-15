@@ -3,7 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Instagram, Youtube } from 'lucide-react';
 import { cn } from '../lib/utils';
 
-export const Navbar = () => {
+interface NavbarProps {
+  onSeminarClick: () => void;
+  onFilterClick: () => void;
+}
+
+export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -16,7 +21,7 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Metodologia', href: '#features' },
+    { name: 'Metodologia', href: '#philosophy' },
     { name: 'Cursos', href: '#courses' },
     { name: 'Free Area', href: '#free' },
     { name: 'Seminários', href: '#seminars' },
@@ -38,7 +43,7 @@ export const Navbar = () => {
         >
           {/* Logo */}
           <a href="#" className="text-xl font-black italic tracking-tighter uppercase group">
-            BERG<span className="text-[#C9A84C] group-hover:text-white transition-colors">EPIC</span>
+            EU<span className="text-white group-hover:text-white/70 transition-colors">BERG</span>
           </a>
 
           {/* Desktop Links */}
@@ -47,7 +52,14 @@ export const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 hover:text-[#C9A84C] transition-colors"
+                onClick={(e) => {
+                  if (link.href === '#seminars') {
+                    e.preventDefault();
+                    onSeminarClick();
+                  }
+                  if (mobileMenuOpen) setMobileMenuOpen(false);
+                }}
+                className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors"
               >
                 {link.name}
               </a>
@@ -57,16 +69,19 @@ export const Navbar = () => {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-6">
             <div className="flex items-center gap-4 border-r border-white/10 pr-6 mr-2">
-              <a href="#" className="text-white/30 hover:text-white transition-colors">
+              <a href="https://www.instagram.com/gupereirabjj/" target="_blank" className="text-white/30 hover:text-white transition-colors">
                 <Instagram size={16} />
               </a>
-              <a href="#" className="text-white/30 hover:text-white transition-colors">
+              <a href="https://www.youtube.com/@GuPereira" target="_blank" className="text-white/30 hover:text-white transition-colors">
                 <Youtube size={16} />
               </a>
             </div>
-            <a href="#seminars" className="btn-magnetic btn-primary px-6 py-2">
-              Acesso Aluno
-            </a>
+            <button 
+              onClick={onSeminarClick}
+              className="btn-magnetic btn-primary px-6 py-2"
+            >
+              Seminários
+            </button>
           </div>
 
           {/* Mobile Toggle */}
@@ -93,19 +108,27 @@ export const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    if (link.href === '#seminars') {
+                      e.preventDefault();
+                      onSeminarClick();
+                    }
+                  }}
                   className="text-lg font-bold uppercase tracking-widest text-center py-2 border-b border-white/5"
                 >
                   {link.name}
                 </a>
               ))}
-              <a 
-                href="#seminars" 
+              <button 
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onSeminarClick();
+                }}
                 className="btn-magnetic btn-primary w-full"
-                onClick={() => setMobileMenuOpen(false)}
               >
-                Acesso Aluno
-              </a>
+                Seminários
+              </button>
             </div>
           </motion.div>
         )}

@@ -1,45 +1,43 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ChevronRight, Target, Flame, Trophy, CheckCircle, RefreshCcw } from 'lucide-react';
+import { Search, ChevronRight, Target, Flame, Trophy, CheckCircle, RefreshCcw, ExternalLink } from 'lucide-react';
 
 const questions = [
   {
     id: 'goal',
-    text: 'Qual seu principal objetivo hoje?',
-    textEn: 'What is your main goal today?',
+    text: 'Qual o maior gap no seu jogo hoje?',
     options: [
-      { id: 'pass', label: 'Passagem de Guarda', labelEn: 'Guard Passing', icon: Target },
-      { id: 'sub', label: 'Finalizações', labelEn: 'Submissions', icon: Flame },
-      { id: 'comp', label: 'Competição', labelEn: 'Competition', icon: Trophy },
+      { id: 'pass', label: 'Passagem & Pressão', icon: Target },
+      { id: 'sub', label: 'Finalização Estrutural', icon: Flame },
+      { id: 'base', label: 'Base & Conexão Inabalável', icon: Trophy },
     ]
   },
   {
     id: 'level',
-    text: 'Qual seu nível de Jiu-Jitsu?',
-    textEn: 'What is your BJJ level?',
+    text: 'Frequência de Treino / Nível',
     options: [
-      { id: 'white', label: 'Iniciante (Branca/Azul)', labelEn: 'Beginner', icon: ChevronRight },
-      { id: 'purple', label: 'Intermediário (Roxa/Marrom)', labelEn: 'Intermediate', icon: ChevronRight },
-      { id: 'black', label: 'Avançado (Preta)', labelEn: 'Advanced', icon: ChevronRight },
+      { id: 'white', label: 'Atleta em Formação (Branca/Azul)', icon: ChevronRight },
+      { id: 'purple', label: 'Praticante Avançado (Roxa/Preta)', icon: ChevronRight },
+      { id: 'black', label: 'Competidor de Elite', icon: ChevronRight },
     ]
   }
 ];
 
 const recommendations = {
   pass: {
-    title: 'Conceitos da Single Leg X',
-    desc: 'O curso perfeito para quem quer dominar a passagem e o controle.',
-    link: '#courses'
+    title: 'Single Leg X: Conceitos',
+    desc: 'O protocolo base para dominar a guarda e as raspagens modernas.',
+    link: 'https://sun.eduzz.com/1441320?cupom=SLE100'
   },
   sub: {
-    title: 'Pressão Faz Diamantes',
-    desc: 'Aprenda a finalizar com pressão absoluta e técnica refinada.',
-    link: '#courses'
+    title: 'Pressão faz Diamantes',
+    desc: 'A metodologia definitiva de controle deadweight e passagens de pressão.',
+    link: 'https://sun.eduzz.com/1818927'
   },
   comp: {
-    title: 'Berg Style: Competição',
-    desc: 'O mindset e as técnicas que me levaram ao topo do mundo.',
-    link: '#courses'
+    title: 'Anulando a 50/50 & Lapelas',
+    desc: 'O nível avançado para neutralizar amarrações e sobrar tecnicamente.',
+    link: 'https://sun.eduzz.com/1351752'
   }
 };
 
@@ -61,40 +59,41 @@ export const SmartFilter = () => {
   const result = recommendations[answers.goal as keyof typeof recommendations] || recommendations.comp;
 
   return (
-    <section className="py-20 px-4">
-      <div className="max-w-4xl mx-auto text-center">
+    <div className="py-12 px-4 bg-[#080808]">
+      <div className="max-w-2xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          className="bg-muted/30 border border-white/5 p-12 rounded-[2rem] backdrop-blur-xl relative overflow-hidden"
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           className="relative overflow-hidden"
         >
-          <div className="grid-background opacity-10" />
-          
           <AnimatePresence mode="wait">
             {!showResult ? (
               <motion.div
                 key={step}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 className="relative z-10"
               >
-                <p className="text-accent-blue font-bold tracking-widest uppercase mb-4">
-                  Pergunta {step + 1} de {questions.length}
+                <p className="text-white/40 text-[10px] font-bold tracking-[0.4em] uppercase mb-4 font-data">
+                  ETAPA {step + 1} DE {questions.length}
                 </p>
-                <h2 className="text-3xl md:text-5xl font-black uppercase mb-12 italic tracking-tighter">
-                  {questions[step].text}
+                <h2 className="text-2xl md:text-4xl font-black uppercase mb-12 italic tracking-tighter">
+                   {questions[step].text}
                 </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-4">
                   {questions[step].options.map((opt) => (
                     <button
                       key={opt.id}
                       onClick={() => handleAnswer(questions[step].id, opt.id)}
-                      className="group p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-accent-blue/50 hover:bg-accent-blue/5 transition-all duration-500 text-left"
+                      className="group p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all duration-500 text-left flex items-center justify-between"
                     >
-                      <opt.icon className="w-8 h-8 text-accent-blue mb-4 transition-transform group-hover:scale-110" />
-                      <span className="text-xl font-bold uppercase">{opt.label}</span>
+                      <div className="flex items-center gap-4">
+                         <opt.icon className="w-5 h-5 text-white/40 group-hover:text-white transition-colors" />
+                         <span className="text-xs font-bold uppercase tracking-widest">{opt.label}</span>
+                      </div>
+                      <ChevronRight size={16} className="text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all" />
                     </button>
                   ))}
                 </div>
@@ -102,24 +101,24 @@ export const SmartFilter = () => {
             ) : (
               <motion.div
                 key="result"
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="relative z-10 py-8"
               >
-                <div className="w-20 h-20 bg-accent-blue rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(0,102,255,0.4)]">
-                  <CheckCircle className="w-10 h-10 text-white" />
+                <div className="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                  <CheckCircle className="w-8 h-8" />
                 </div>
-                <h2 className="text-sm font-bold text-accent-blue uppercase tracking-[0.4em] mb-4">Recomendação Ideal</h2>
-                <h3 className="text-4xl md:text-6xl font-black uppercase italic mb-6 leading-none">
+                <h2 className="text-[10px] font-bold text-white/40 uppercase tracking-[0.5em] mb-4 font-data">Sugestão de Protocolo</h2>
+                <h3 className="text-3xl md:text-5xl font-black uppercase italic mb-6 leading-none">
                   {result.title}
                 </h3>
-                <p className="text-white/40 text-sm uppercase tracking-widest mb-12 max-w-md mx-auto">
-                  {result.desc}
+                <p className="text-white/40 text-[10px] uppercase tracking-widest mb-12 max-w-sm mx-auto leading-relaxed">
+                   {result.desc}
                 </p>
                 
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                  <a href={result.link} className="btn-epic">
-                    Acessar Agora
+                <div className="flex flex-col items-center justify-center gap-6">
+                  <a href={result.link} className="btn-magnetic btn-primary w-full">
+                    Acessar Conteúdo
                   </a>
                   <button 
                     onClick={() => {
@@ -129,23 +128,14 @@ export const SmartFilter = () => {
                     className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/20 hover:text-white transition-colors"
                   >
                     <RefreshCcw className="w-3 h-3" />
-                    Refazer Teste
+                    Reiniciar Protocolo
                   </button>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-
-          {!showResult && step > 0 && (
-            <button 
-              onClick={() => setStep(step - 1)}
-              className="mt-8 text-white/40 hover:text-white transition-colors uppercase tracking-widest text-xs"
-            >
-              Voltar
-            </button>
-          )}
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 };

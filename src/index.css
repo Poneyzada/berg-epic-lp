@@ -4,15 +4,15 @@
 
 @layer base {
   :root {
-    --primary: 240 17% 6%; /* Obsidian #0D0D12 */
-    --accent: 45 54% 54%; /* Champagne #C9A84C */
-    --background: 36 20% 97%; /* Ivory #FAF8F5 */
-    --text-dark: 240 12% 21%; /* Slate #2A2A35 */
-    --foreground: 240 17% 95%;
+    --primary: 0 0% 0%; /* Pure Black #000000 */
+    --accent: 0 0% 100%; /* Pure White #FFFFFF */
+    --background: 0 0% 0%;
+    --text-dark: 0 0% 100%;
+    --foreground: 0 0% 100%;
   }
 
   body {
-    @apply bg-[#0D0D12] text-foreground antialiased selection:bg-[#C9A84C]/30 selection:text-white;
+    @apply bg-[#000000] text-white antialiased selection:bg-white/30 selection:text-white;
     font-family: 'Inter', sans-serif;
   }
 
@@ -49,11 +49,11 @@
   }
 
   .btn-primary {
-    @apply bg-[#C9A84C] text-[#0D0D12] hover:bg-white transition-colors duration-500;
+    @apply bg-white text-black hover:bg-white/90 transition-colors duration-500;
   }
 
   .btn-secondary {
-    @apply bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10;
+    @apply bg-black border border-white/20 text-white hover:bg-white/5;
   }
 
   /* Hover Lift */
@@ -63,7 +63,7 @@
 
   /* Section Fade Overlays */
   .section-overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-[#0D0D12] via-transparent to-transparent;
+    @apply absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent;
   }
 }
 
@@ -73,11 +73,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-[#0D0D12];
+  @apply bg-black;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-[#C9A84C]/20 hover:bg-[#C9A84C]/40;
+  @apply bg-white/20 hover:bg-white/40;
 }
 
 /* Smooth Scrolling */
