@@ -7,7 +7,7 @@ import { CourseShowcase } from './components/sections/Courses'
 
 function App() {
   return (
-    <main className="relative min-h-screen bg-background text-foreground animate-in fade-in duration-1000">
+    <main className="relative min-h-screen bg-background text-foreground">
       <Navbar />
       
       {/* Global Texture Overlay */}
