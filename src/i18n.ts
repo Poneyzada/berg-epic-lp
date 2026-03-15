@@ -15,18 +15,14 @@ const resources = {
 };
 
 i18n
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources,
+    lng: 'pt',
     fallbackLng: 'pt',
     interpolation: {
       escapeValue: false,
-    },
-    detection: {
-      order: ['navigator', 'htmlTag', 'path', 'subdomain'],
-      caches: ['localStorage', 'cookie'],
-    },
+    }
   });
 
 export default i18n;
