@@ -23,8 +23,7 @@ export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
   const navLinks = [
     { name: 'Metodologia', href: '#philosophy' },
     { name: 'Cursos', href: '#courses' },
-    { name: 'Free Area', href: '#free' },
-    { name: 'Seminários', href: '#seminars' },
+    { name: 'Técnicas', href: '#free' },
   ];
 
   return (

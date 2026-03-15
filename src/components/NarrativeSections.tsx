@@ -100,13 +100,14 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
   ];
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.protocol-card');
       
       cards.forEach((card: any, i) => {
         ScrollTrigger.create({
           trigger: card,
-          start: 'top 10%',
+          start: isMobile ? 'top 15%' : 'top 10%',
           pin: true,
           pinSpacing: false,
           onUpdate: (self) => {
@@ -114,7 +115,7 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
             gsap.set(card, {
               scale: 1 - progress * 0.05,
               opacity: 1 - progress * 0.6,
-              filter: `blur(${progress * 20}px)`
+              filter: `blur(${progress * (isMobile ? 2 : 5)}px)`
             });
           }
         });

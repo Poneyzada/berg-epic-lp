@@ -117,7 +117,7 @@ export const Courses = () => {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.8 }}
               style={{ perspective: '1000px' }}
-              className={`group relative p-[1px] rounded-[2rem] overflow-hidden transition-all duration-700 ${course.color}`}
+              className={`scroll-mt-32 group relative p-[1px] rounded-[2rem] overflow-hidden transition-all duration-700 ${course.color}`}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
               
@@ -127,7 +127,7 @@ export const Courses = () => {
               >
                 {/* Background Pattern / Image Fallback */}
                 <div className="absolute inset-0 opacity-10 grayscale group-hover:opacity-20 transition-opacity pointer-events-none">
-                   <img src={course.image} className="w-full h-full object-cover" />
+                   <img src={course.image} className="w-full h-full object-cover object-center" />
                 </div>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-[80px] group-hover:bg-blue-500/10 transition-colors" />
                 
@@ -149,7 +149,7 @@ export const Courses = () => {
                   <div className="text-3xl font-black uppercase italic tracking-tighter">
                     {course.price.split(',')[0]}
                   </div>
-                  <button className="text-[10px] font-black uppercase tracking-widest text-blue-500 hover:text-white transition-colors">
+                  <button className="text-[9px] font-black uppercase tracking-widest text-blue-500 hover:text-white transition-colors border border-blue-500/20 px-3 py-1 rounded-full">
                     Ver Detalhes
                   </button>
                 </div>

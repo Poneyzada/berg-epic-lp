@@ -154,9 +154,9 @@ export const CourseDetailModal = ({ isOpen, onClose, course }: CourseDetailModal
                     href={course.checkout}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="shimmer-btn relative px-12 py-6 bg-white text-black font-black uppercase italic tracking-tighter hover:bg-white/90 transition-all rounded-full flex items-center justify-center gap-4 shadow-[0_20px_40px_rgba(255,255,255,0.1)] group overflow-hidden"
+                    className="shimmer-btn relative px-8 py-4 md:px-12 md:py-5 bg-white text-black font-black uppercase italic tracking-tighter hover:bg-white/90 transition-all rounded-full flex items-center justify-center gap-4 shadow-[0_20px_40px_rgba(255,255,255,0.1)] group overflow-hidden"
                   >
-                    <span className="relative z-10 text-base md:text-lg">Começar Agora</span>
+                    <span className="relative z-10 text-sm md:text-base">Começar Agora</span>
                     <ArrowUpRight className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </a>
                 </div>
