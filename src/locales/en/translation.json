@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "title1": "World Champion",
+    "cta": "I Want To Become Unbeatable"
+  },
+  "seminars": {
+    "title": "Seminars",
+    "subtitle": "Bring Berg to your gym",
+    "form_name": "Name",
+    "form_gym": "Gym Name",
+    "form_msg": "Message",
+    "form_submit": "Request Info"
+  }
+}

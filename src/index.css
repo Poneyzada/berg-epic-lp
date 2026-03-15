@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 2%;
+    --foreground: 0 0% 100%;
+    --accent-blue: 215 100% 50%;
+    --accent-gold: 45 100% 50%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 60%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-blue-600 selection:text-white;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Magazine Texture Overlay */
+  .magazine-overlay {
+    @apply fixed inset-0 pointer-events-none z-[9999] opacity-[0.04] mix-blend-overlay;
+    background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  /* Premium Grid System */
+  .grid-background {
+    @apply absolute inset-0 z-0 opacity-20 pointer-events-none;
+    background-image: 
+      linear-gradient(to right, #1a1a1a 1px, transparent 1px),
+      linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at center, black, transparent 90%);
+  }
+
+  /* Cinematic Button */
+  .btn-epic {
+    @apply relative px-8 py-3 bg-white text-black font-bold uppercase tracking-[0.2em] 
+           transition-all duration-500 hover:scale-105 active:scale-95
+           overflow-hidden flex items-center justify-center gap-2;
+  }
+
+  .btn-epic::before {
+    @apply content-[''] absolute inset-0 bg-blue-600 translate-x-[-100%] transition-transform duration-500;
+  }
+
+  .btn-epic:hover::before {
+    @apply translate-x-0;
+  }
+
+  .btn-epic span {
+    @apply relative z-10 transition-colors duration-500;
+  }
+
+  .btn-epic:hover span {
+    @apply text-white;
+  }
+  
+  /* Adidas-style stripes decoration */
+  .adidas-stripes {
+    @apply flex flex-col gap-1 opacity-20;
+  }
+  .adidas-stripes div {
+    @apply h-[2px] w-8 bg-white;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
