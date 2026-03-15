@@ -5,7 +5,7 @@ import { SmartFilter } from './components/SmartFilter'
 import { FreeArea } from './components/sections/FreeArea'
 import { CourseShowcase } from './components/sections/Courses'
 
-function App() {
+export function App() {
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       <Navbar />
@@ -41,4 +41,3 @@ function App() {
   )
 }
 
-export default App
