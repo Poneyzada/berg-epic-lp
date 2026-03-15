@@ -27,7 +27,6 @@ export default {
         sans: ["Inter", "sans-serif"],
       },
       backgroundImage: {
-        'magazine-texture': "url('/texture-grain.png')",
         'grid-pattern': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
       }
     },
