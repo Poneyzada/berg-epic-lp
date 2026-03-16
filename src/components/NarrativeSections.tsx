@@ -59,11 +59,11 @@ export const Philosophy = () => {
         <video
           muted
           playsInline
-          className="w-full h-full object-cover object-top grayscale opacity-30"
+          className="w-full h-full object-cover object-[center_25%] grayscale opacity-30"
         >
           <source src="/videos/berg-adidas.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[40px]" />
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-md" />
       </div>
       
       <div className="max-w-6xl mx-auto px-6 relative z-10">
