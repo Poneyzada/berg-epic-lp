@@ -36,12 +36,20 @@ export const CourseDetailModal = ({ isOpen, onClose, course }: CourseDetailModal
               0% { transform: translateX(-100%); }
               100% { transform: translateX(100%); }
             }
+            @keyframes pulse-shimmer {
+              0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+              70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+              100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+            }
             .shimmer-btn::after {
               content: '';
               position: absolute;
               top: 0; left: 0; width: 100%; height: 100%;
-              background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-              animation: shimmer 2s infinite;
+              background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+              animation: shimmer 1.5s infinite;
+            }
+            .shimmer-btn {
+              animation: pulse-shimmer 2s infinite;
             }
           `}} />
 

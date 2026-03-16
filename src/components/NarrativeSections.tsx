@@ -40,7 +40,7 @@ export const Philosophy = () => {
         >
           <source src="/videos/berg-adidas.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-[100px]" />
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[40px]" />
       </div>
       
       <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -108,18 +108,17 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
         ScrollTrigger.create({
           trigger: card,
           start: 'top top',
-          end: '+=200%',
+          end: '+=120%', // Shorter stay for faster feel
           pin: true,
-          pinSpacing: false,
+          pinSpacing: false, // Fluid overlap as requested
           onUpdate: (self) => {
             const progress = self.progress;
-            // Extremely delayed blur: only starts in the last 20% of the pin duration
-            // This ensures visuals stay sharp until the next card is well into the overlap
-            const exitProgress = Math.max(0, (progress - 0.8) * 5); 
+            // Blur starts at 60% of the card's journey, making it smoother
+            const exitProgress = Math.max(0, (progress - 0.6) * 2.5); 
             gsap.set(card, {
               scale: 1 - exitProgress * 0.05,
-              opacity: 1 - exitProgress * 0.8,
-              filter: `blur(${exitProgress * (isMobile ? 8 : 20)}px)`
+              opacity: 1 - exitProgress * 0.7,
+              filter: `blur(${exitProgress * (isMobile ? 6 : 15)}px)`
             });
           }
         });
