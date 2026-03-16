@@ -34,21 +34,21 @@ export const SocialProof = () => {
                 alt="Gutemberg Bio" 
                 className="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-              <div className="absolute bottom-10 left-10">
-                <h4 className="text-3xl font-black uppercase italic tracking-tighter">Gutemberg Pereira</h4>
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+              <div className="absolute bottom-32 left-8 md:bottom-10 md:left-10 z-10">
+                <h4 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter">Gutemberg Pereira</h4>
                 <p className="text-white/40 text-[10px] uppercase font-bold tracking-[0.4em] mt-2">Atleta Campeão Mundial</p>
               </div>
             </div>
             
             {/* Stats Overlay */}
-            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:-right-6 md:right-10 bg-white text-black p-6 md:p-8 rounded-3xl flex flex-col gap-4 md:gap-6 shadow-[0_30px_60px_rgba(255,255,255,0.1)] z-20 w-[80%] md:w-auto">
+            <div className="absolute bottom-4 right-4 md:-right-10 md:bottom-20 bg-white text-black p-4 md:p-8 rounded-[2rem] flex flex-col gap-3 md:gap-6 shadow-[0_30px_60px_rgba(0,0,0,0.4)] z-30">
                {stats.map((stat, i) => (
-                 <div key={i} className="flex items-center gap-4 border-b border-black/5 pb-4 last:border-0 last:pb-0">
-                    <stat.icon size={20} />
+                 <div key={i} className="flex items-center gap-3 md:gap-4 border-b border-black/5 pb-2 md:pb-4 last:border-0 last:pb-0">
+                    <stat.icon size={14} className="md:w-5 md:h-5" />
                     <div>
-                      <p className="text-2xl font-black leading-none">{stat.value}</p>
-                      <p className="text-[8px] font-bold uppercase tracking-widest opacity-40">{stat.label}</p>
+                      <p className="text-base md:text-2xl font-black leading-none">{stat.value}</p>
+                      <p className="text-[6px] md:text-[8px] font-bold uppercase tracking-widest opacity-40">{stat.label}</p>
                     </div>
                  </div>
                ))}
