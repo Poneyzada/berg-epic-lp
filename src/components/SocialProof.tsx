@@ -14,7 +14,6 @@ export const SocialProof = () => {
 
   const stats = [
     { icon: Users, value: "769+", label: "Alunos Ativos" },
-    { icon: Users, value: "769+", label: "Alunos Ativos" },
     { icon: Globe, value: "20+", label: "Países" },
     { icon: Trophy, value: "Elite", label: "Metodologia" }
   ];

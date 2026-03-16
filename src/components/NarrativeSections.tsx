@@ -108,17 +108,17 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
         ScrollTrigger.create({
           trigger: card,
           start: 'top top',
-          end: '+=120%', // Shorter stay for faster feel
+          end: '+=100%', 
           pin: true,
-          pinSpacing: false, // Fluid overlap as requested
+          pinSpacing: false, 
           onUpdate: (self) => {
             const progress = self.progress;
-            // Blur starts at 60% of the card's journey, making it smoother
-            const exitProgress = Math.max(0, (progress - 0.6) * 2.5); 
+            // Linear and smooth exit starting from 50%
+            const exitProgress = Math.max(0, (progress - 0.5) * 2); 
             gsap.set(card, {
-              scale: 1 - exitProgress * 0.05,
-              opacity: 1 - exitProgress * 0.7,
-              filter: `blur(${exitProgress * (isMobile ? 6 : 15)}px)`
+              scale: 1 - exitProgress * 0.03,
+              opacity: 1 - exitProgress * 0.8,
+              filter: `blur(${exitProgress * (isMobile ? 5 : 10)}px)`
             });
           }
         });
