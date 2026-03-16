@@ -65,31 +65,32 @@ export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
             ))}
           </div>
 
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-6">
-            <div className="flex items-center gap-4 border-r border-white/10 pr-6 mr-2">
-              <a href="https://www.instagram.com/gupereirabjj/" target="_blank" className="text-white/30 hover:text-white transition-colors">
-                <Instagram size={16} />
+          {/* Actions & Toggle */}
+          <div className="flex items-center gap-2 md:gap-6">
+            {/* Social Icons - Visible on all screen sizes, subtle on mobile */}
+            <div className="flex items-center gap-3 md:gap-4 md:border-r md:border-white/10 md:pr-6 md:mr-2">
+              <a href="https://www.instagram.com/gupereirabjj/" target="_blank" className="text-white/20 hover:text-white transition-colors md:text-white/40">
+                <Instagram size={14} className="md:w-4 md:h-4" />
               </a>
-              <a href="https://www.youtube.com/@GuPereira" target="_blank" className="text-white/30 hover:text-white transition-colors">
-                <Youtube size={16} />
+              <a href="https://www.youtube.com/@GuPereira" target="_blank" className="text-white/20 hover:text-white transition-colors md:text-white/40">
+                <Youtube size={14} className="md:w-4 md:h-4" />
               </a>
             </div>
+            
             <button 
               onClick={onSeminarClick}
-              className="btn-magnetic btn-primary px-6 py-2"
+              className="hidden md:block btn-magnetic btn-primary px-6 py-2"
             >
               Seminários
             </button>
-          </div>
 
-          {/* Mobile Toggle */}
-          <button 
-            className="md:hidden p-2 text-white"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
+            <button 
+              className="md:hidden p-2 text-white/60 hover:text-white"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </div>
 
