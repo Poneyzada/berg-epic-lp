@@ -108,14 +108,17 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
         ScrollTrigger.create({
           trigger: card,
           start: isMobile ? 'top 15%' : 'top 10%',
+          end: 'bottom top',
           pin: true,
-          pinSpacing: false,
+          pinSpacing: true, 
           onUpdate: (self) => {
             const progress = self.progress;
+            // Exit animation (fade/blur/scale) only in the last 10% of the pin
+            const exitProgress = Math.max(0, (progress - 0.9) * 10); 
             gsap.set(card, {
-              scale: 1 - progress * 0.05,
-              opacity: 1 - progress * 0.6,
-              filter: `blur(${progress * (isMobile ? 2 : 5)}px)`
+              scale: 1 - exitProgress * 0.05,
+              opacity: 1 - exitProgress * 0.5,
+              filter: `blur(${exitProgress * (isMobile ? 2 : 4)}px)`
             });
           }
         });

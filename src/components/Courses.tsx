@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Zap, Target, ArrowUpRight, Users, Clock, ShieldCheck, MessageCircle } from 'lucide-react';
+import { Diamond, Infinity, Anchor, ArrowUpRight, Users, Clock, ShieldCheck, MessageCircle } from 'lucide-react';
 import { CourseDetailModal } from './CourseDetailModal';
 
 const courses = [
@@ -10,7 +10,7 @@ const courses = [
     desc: 'O domínio absoluto da guarda mais eficiente do BJJ moderno.',
     price: 'R$ 197,00',
     checkout: 'https://sun.eduzz.com/1441320?cupom=SLE100',
-    icon: Target,
+    icon: Anchor,
     color: 'hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.5)]',
     accent: 'text-blue-500',
     image: '/courses/PRESSÃO FAZ DIAMANTES (1).avif',
@@ -35,7 +35,7 @@ const courses = [
     desc: 'A arte de esmagar resistências e evoluir como professor ou competidor.',
     price: 'R$ 247,00',
     checkout: 'https://sun.eduzz.com/1818927',
-    icon: Shield,
+    icon: Diamond,
     color: 'hover:shadow-[0_0_50px_-12px_rgba(255,255,255,0.3)]',
     accent: 'text-white',
     image: '/courses/SINGLE LEG X (1).avif',
@@ -60,7 +60,7 @@ const courses = [
     desc: 'Mecanismos por trás da 50/50 e Lapelas para anular o jogo adversário.',
     price: 'R$ 247,00',
     checkout: 'https://sun.eduzz.com/1351752',
-    icon: Zap,
+    icon: Infinity,
     color: 'hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.5)]',
     accent: 'text-blue-500',
     image: '/courses/5050 E LAPELAS (1).avif',
@@ -126,7 +126,7 @@ export const Courses = () => {
                 className="relative bg-[#050505] rounded-[2rem] p-10 h-full flex flex-col border border-white/5 overflow-hidden cursor-pointer"
               >
                 {/* Background Pattern / Image Fallback */}
-                <div className="absolute inset-0 opacity-10 grayscale group-hover:opacity-20 transition-opacity pointer-events-none">
+                <div className="absolute inset-0 opacity-10 grayscale group-hover:opacity-20 transition-opacity pointer-events-none flex items-center justify-center">
                    <img src={course.image} className="w-full h-full object-cover object-center" />
                 </div>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-[80px] group-hover:bg-blue-500/10 transition-colors" />
@@ -149,7 +149,7 @@ export const Courses = () => {
                   <div className="text-3xl font-black uppercase italic tracking-tighter">
                     {course.price.split(',')[0]}
                   </div>
-                  <button className="text-[9px] font-black uppercase tracking-widest text-blue-500 hover:text-white transition-colors border border-blue-500/20 px-3 py-1 rounded-full">
+                  <button className="text-[8px] font-black uppercase tracking-widest text-blue-500 hover:text-white transition-colors border border-blue-500/20 px-2.5 py-1 rounded-full">
                     Ver Detalhes
                   </button>
                 </div>
