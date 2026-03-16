@@ -12,7 +12,7 @@ export const Footer = () => {
               Levando o Jiu-Jitsu de Salvador para o mundo. Técnica, precisão e mentalidade campeã em cada detalhe.
             </p>
             <div className="flex gap-4">
-               <a href="https://www.instagram.com/gupereirabjj/" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-white text-white hover:text-black transition-all">
+               <a href="https://www.instagram.com/euberg10?igsh=MmNveG9qdTZja3Zp" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-white text-white hover:text-black transition-all">
                   <Instagram size={18} />
                </a>
                <a href="https://www.youtube.com/@GuPereira" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-white text-white hover:text-black transition-all">

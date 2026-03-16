@@ -69,10 +69,20 @@ export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
           <div className="flex items-center gap-2 md:gap-6">
             {/* Social Icons - Visible on all screen sizes, subtle on mobile */}
             <div className="flex items-center gap-3 md:gap-4 md:border-r md:border-white/10 md:pr-6 md:mr-2">
-              <a href="https://www.instagram.com/gupereirabjj/" target="_blank" className="text-white/20 hover:text-white transition-colors md:text-white/40">
+              <a 
+                href="https://www.instagram.com/euberg10?igsh=MmNveG9qdTZja3Zp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/40"
+              >
                 <Instagram size={14} className="md:w-4 md:h-4" />
               </a>
-              <a href="https://www.youtube.com/@GuPereira" target="_blank" className="text-white/20 hover:text-white transition-colors md:text-white/40">
+              <a 
+                href="https://www.youtube.com/@GuPereira"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/40"
+              >
                 <Youtube size={14} className="md:w-4 md:h-4" />
               </a>
             </div>

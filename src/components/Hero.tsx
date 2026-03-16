@@ -56,7 +56,7 @@ export const Hero = () => {
               <Youtube className="group-hover:scale-110 transition-transform w-5 h-5 md:w-6 md:h-6" />
             </a>
             <a 
-              href="https://www.instagram.com/gupereirabjj/"
+              href="https://www.instagram.com/euberg10?igsh=MmNveG9qdTZja3Zp"
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/40"

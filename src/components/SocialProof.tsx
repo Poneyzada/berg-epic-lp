@@ -35,14 +35,14 @@ export const SocialProof = () => {
                 className="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-              <div className="absolute bottom-32 left-8 md:bottom-10 md:left-10 z-10">
+              <div className="absolute bottom-32 left-6 md:bottom-10 md:left-10 z-10">
                 <h4 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter">Gutemberg Pereira</h4>
                 <p className="text-white/40 text-[10px] uppercase font-bold tracking-[0.4em] mt-2">Atleta Campeão Mundial</p>
               </div>
             </div>
             
             {/* Stats Overlay */}
-            <div className="absolute bottom-4 right-4 md:-right-10 md:bottom-20 bg-white text-black p-4 md:p-8 rounded-[2rem] flex flex-col gap-3 md:gap-6 shadow-[0_30px_60px_rgba(0,0,0,0.4)] z-30">
+            <div className="absolute bottom-2 right-2 md:-right-10 md:bottom-20 bg-white text-black p-4 md:p-8 rounded-[2rem] flex flex-col gap-3 md:gap-6 shadow-[0_30px_60px_rgba(0,0,0,0.4)] z-30">
                {stats.map((stat, i) => (
                  <div key={i} className="flex items-center gap-3 md:gap-4 border-b border-black/5 pb-2 md:pb-4 last:border-0 last:pb-0">
                     <stat.icon size={14} className="md:w-5 md:h-5" />
