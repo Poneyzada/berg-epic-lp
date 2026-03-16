@@ -101,7 +101,7 @@ export const CourseDetailModal = ({ isOpen, onClose, course }: CourseDetailModal
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase italic tracking-tighter leading-none mb-6">
                   {course.title}
                 </h2>
-                <p className="text-white/60 text-sm md:text-lg font-data leading-relaxed max-w-2xl">
+                <p className="text-white/80 text-sm md:text-lg font-data leading-relaxed max-w-2xl">
                   {course.hook}
                 </p>
               </div>
@@ -110,7 +110,7 @@ export const CourseDetailModal = ({ isOpen, onClose, course }: CourseDetailModal
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
                 {course.benefits.map((benefit, i) => (
                   <div key={i} className="p-4 bg-white/5 border border-white/5 rounded-2xl flex flex-col gap-3 group hover:border-white/10 transition-colors">
-                    <benefit.icon size={20} className="text-white/40 group-hover:text-blue-500 transition-colors" />
+                    <benefit.icon size={20} className="text-white/65 group-hover:text-blue-500 transition-colors" />
                     <span className="text-[10px] font-black uppercase tracking-widest text-white/80 leading-tight">
                       {benefit.label}
                     </span>
@@ -121,15 +121,15 @@ export const CourseDetailModal = ({ isOpen, onClose, course }: CourseDetailModal
               {/* Curriculum Summary */}
               <div className="space-y-12 mb-12">
                 <div>
-                  <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 mb-8 flex items-center gap-4">
+                  <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60 mb-8 flex items-center gap-4">
                     Módulos Estratégicos
-                    <div className="h-px flex-1 bg-white/5" />
+                    <div className="h-px flex-1 bg-white/10" />
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                     {course.modules.map((module, i) => (
                       <div key={i} className="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] transition-colors">
                         <CheckCircle2 size={16} className="text-blue-500 mt-0.5 flex-shrink-0" />
-                        <p className="text-[11px] md:text-xs text-white/70 font-data leading-relaxed">{module}</p>
+                        <p className="text-[11px] md:text-xs text-white/85 font-data leading-relaxed">{module}</p>
                       </div>
                     ))}
                   </div>
@@ -153,9 +153,9 @@ export const CourseDetailModal = ({ isOpen, onClose, course }: CourseDetailModal
                       <span className="text-5xl md:text-6xl font-black italic tracking-tighter">
                         {course.price}
                       </span>
-                      <span className="text-white/20 text-xs uppercase font-bold tracking-widest">à vista</span>
+                      <span className="text-white/60 text-xs uppercase font-bold tracking-widest">à vista</span>
                     </div>
-                    <p className="text-[9px] text-white/40 uppercase tracking-widest mt-2">ou em até 12x no cartão via Eduzz</p>
+                    <p className="text-[9px] text-white/65 uppercase tracking-widest mt-2">ou em até 12x no cartão via Eduzz</p>
                   </div>
                   
                   <a
