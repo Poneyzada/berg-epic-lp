@@ -107,18 +107,19 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
       cards.forEach((card: any, i) => {
         ScrollTrigger.create({
           trigger: card,
-          start: isMobile ? 'top 15%' : 'top 10%',
-          end: 'bottom top',
+          start: 'top top',
+          end: '+=200%',
           pin: true,
-          pinSpacing: true, 
+          pinSpacing: false,
           onUpdate: (self) => {
             const progress = self.progress;
-            // Exit animation (fade/blur/scale) only in the last 10% of the pin
-            const exitProgress = Math.max(0, (progress - 0.9) * 10); 
+            // Extremely delayed blur: only starts in the last 20% of the pin duration
+            // This ensures visuals stay sharp until the next card is well into the overlap
+            const exitProgress = Math.max(0, (progress - 0.8) * 5); 
             gsap.set(card, {
               scale: 1 - exitProgress * 0.05,
-              opacity: 1 - exitProgress * 0.5,
-              filter: `blur(${exitProgress * (isMobile ? 2 : 4)}px)`
+              opacity: 1 - exitProgress * 0.8,
+              filter: `blur(${exitProgress * (isMobile ? 8 : 20)}px)`
             });
           }
         });
@@ -133,7 +134,7 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
         {steps.map((step, i) => (
           <div 
             key={step.id} 
-            className="protocol-card glass-card min-h-[70vh] mb-40 p-12 md:p-32 flex flex-col md:flex-row gap-20 items-center relative overflow-hidden group border-white/5"
+            className="protocol-card glass-card min-h-screen mb-[80vh] p-12 md:p-32 flex flex-col md:flex-row gap-20 items-center relative overflow-hidden group border-white/5"
           >
             {/* Background Content */}
             <div className="absolute inset-0 z-0 opacity-20 pointer-events-none group-hover:opacity-40 transition-opacity duration-1000">
@@ -165,7 +166,7 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
                 <div className="mb-16">
                    <a 
                      href={step.target}
-                     className="inline-block px-8 py-4 border border-white/20 hover:border-white text-[10px] font-bold uppercase tracking-[0.4em] transition-all rounded-full"
+                     className="inline-block px-6 py-3 border border-white/20 hover:border-white text-[9px] font-bold uppercase tracking-[0.4em] transition-all rounded-full"
                    >
                      {step.cta}
                    </a>
