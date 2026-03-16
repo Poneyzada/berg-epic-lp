@@ -37,7 +37,7 @@ export const SocialProof = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-32 left-6 md:bottom-10 md:left-10 z-10">
                 <h4 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter">Gutemberg Pereira</h4>
-                <p className="text-white/40 text-[10px] uppercase font-bold tracking-[0.4em] mt-2">Atleta Campeão Mundial</p>
+                <p className="text-white/65 text-[10px] uppercase font-bold tracking-[0.4em] mt-2">Atleta Campeão Mundial</p>
               </div>
             </div>
             
@@ -61,7 +61,7 @@ export const SocialProof = () => {
             className="space-y-8"
           >
             <div>
-              <h2 className="text-sm font-data font-black uppercase tracking-[0.5em] text-white/30 mb-4">
+              <h2 className="text-sm font-data font-black uppercase tracking-[0.5em] text-white/60 mb-4">
                 A Jornada
               </h2>
               <h3 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none mb-8">
@@ -69,7 +69,7 @@ export const SocialProof = () => {
               </h3>
             </div>
             
-            <div className="space-y-6 text-white/60 text-sm md:text-lg font-data leading-relaxed">
+            <div className="space-y-6 text-white/80 text-sm md:text-lg font-data leading-relaxed">
               <p>
                 Natural de Salvador, Bahia, Gutemberg Pereira iniciou sua jornada no Jiu-Jitsu aos 15 anos. Com o sonho de ser um grande campeão, mudou-se para o Rio de Janeiro onde viveu a realidade de morar e treinar 100% focado no tatame.
               </p>
@@ -86,7 +86,7 @@ export const SocialProof = () => {
         {/* Testimonials Grid */}
         <div className="space-y-16">
           <div className="text-center">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-white/20 mb-4">Prova Social</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-white/50 mb-4">Prova Social</h3>
             <h4 className="text-3xl md:text-5xl font-black uppercase italic">Voz dos Especialistas.</h4>
           </div>
 
@@ -99,14 +99,14 @@ export const SocialProof = () => {
                 transition={{ delay: i * 0.1 }}
                 className="p-8 bg-zinc-900/50 border border-white/5 rounded-3xl hover:border-white/20 transition-all flex flex-col gap-6"
               >
-                <div className="flex gap-1 text-white/40">
+                <div className="flex gap-1 text-white/80">
                   {[...Array(5)].map((_, i) => <Star key={i} size={12} fill="currentColor" />)}
                 </div>
                 <div className="relative">
                   <Quote size={24} className="absolute -top-4 -left-4 text-white/5" />
                   <p className="text-white/80 font-data italic leading-relaxed text-sm">"{t.text}"</p>
                 </div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-auto">— {t.name}</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/60 mt-auto">— {t.name}</p>
               </motion.div>
             ))}
           </div>

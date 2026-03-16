@@ -101,7 +101,7 @@ export const Courses = () => {
               MEUS <br /> CURSOS.
             </h3>
           </div>
-          <p className="text-white/40 text-sm uppercase tracking-widest max-w-xs text-right font-data">
+          <p className="text-white/70 text-sm uppercase tracking-widest max-w-xs text-right font-data">
             A metodologia que transformou o cenário do Jiu-Jitsu competitivo.
           </p>
         </div>
@@ -141,7 +141,7 @@ export const Courses = () => {
                 <h4 className="text-3xl font-black uppercase mb-4 leading-none tracking-tight group-hover:translate-x-2 transition-transform duration-500 relative z-10">
                   {course.title}
                 </h4>
-                <p className="text-white/40 text-[10px] uppercase tracking-widest mb-12 font-data relative z-10">
+                <p className="text-white/70 text-[10px] uppercase tracking-widest mb-12 font-data relative z-10">
                    {course.desc}
                 </p>
                 

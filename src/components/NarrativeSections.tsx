@@ -178,17 +178,17 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
                <span className="text-6xl md:text-[14rem] font-black text-white/[0.03] font-data absolute -top-20 -left-10 leading-none">
                   {step.id}
                </span>
-               <h3 className="text-5xl md:text-8xl font-black uppercase italic mb-8 tracking-tighter leading-[0.8]">
+               <h3 className="text-white text-5xl md:text-8xl font-black uppercase italic mb-8 tracking-tighter leading-[0.8]">
                   {step.title.split(' ')[0]} <br />
                   <span className="font-drama text-white italic">{step.title.split(' ')[1]}</span>
                </h3>
-                <p className="text-white/60 text-sm md:text-lg uppercase tracking-widest leading-relaxed mb-12 max-w-xl font-data">
+                <p className="text-white/80 text-sm md:text-lg uppercase tracking-widest leading-relaxed mb-12 max-w-xl font-data">
                   {step.desc}
                 </p>
                 <div className="mb-16">
                    <a 
                      href={step.target}
-                     className="inline-block px-6 py-3 border border-white/20 hover:border-white text-[9px] font-bold uppercase tracking-[0.4em] transition-all rounded-full"
+                     className="inline-block px-6 py-3 border border-white/50 hover:border-white text-[9px] font-bold uppercase tracking-[0.4em] text-white transition-all rounded-full"
                    >
                      {step.cta}
                    </a>
@@ -196,8 +196,8 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-px bg-white/20" />
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/60 mb-1">{step.mood}</span>
-                    <span className="text-[8px] font-data text-white/20 uppercase tracking-[0.3em]">Protocolo Verificado</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/80 mb-1">{step.mood}</span>
+                    <span className="text-[8px] font-data text-white/50 uppercase tracking-[0.3em]">Protocolo Verificado</span>
                   </div>
                </div>
             </div>

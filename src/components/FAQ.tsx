@@ -33,8 +33,8 @@ export const FAQ = () => {
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
-            <HelpCircle size={14} className="text-white/40" />
-            <span className="text-[10px] font-black uppercase tracking-widest text-white/60">Dúvidas Frequentes</span>
+            <HelpCircle size={14} className="text-white/60" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-white/80">Dúvidas Frequentes</span>
           </div>
           <h3 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter">PROTOCOLO DE <br /> SEGURANÇA.</h3>
         </div>
@@ -49,12 +49,12 @@ export const FAQ = () => {
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full px-6 py-5 flex items-center justify-between gap-4 text-left"
               >
-                <span className="text-sm md:text-base font-black uppercase italic tracking-tight text-white/80">
+                <span className="text-sm md:text-base font-black uppercase italic tracking-tight text-white">
                   {item.q}
                 </span>
                 <ChevronDown 
                   size={18} 
-                  className={`text-white/20 transition-transform duration-500 ${openIndex === i ? 'rotate-180' : ''}`}
+                  className={`text-white/50 transition-transform duration-500 ${openIndex === i ? 'rotate-180' : ''}`}
                 />
               </button>
               
@@ -66,7 +66,7 @@ export const FAQ = () => {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="px-6 pb-6 text-xs md:text-sm text-white/40 font-data leading-relaxed">
+                    <div className="px-6 pb-6 text-xs md:text-sm text-white/75 font-data leading-relaxed">
                       {item.a}
                     </div>
                   </motion.div>
@@ -77,7 +77,7 @@ export const FAQ = () => {
         </div>
 
         <div className="mt-20 p-8 border border-white/5 rounded-3xl bg-zinc-900 text-center">
-           <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-4">Ainda tem dúvidas?</p>
+           <p className="text-[10px] font-black uppercase tracking-widest text-white/60 mb-4">Ainda tem dúvidas?</p>
            <a 
             href="mailto:gupereirabjj@hotmail.com" 
             className="text-white font-black uppercase italic hover:scale-105 transition-transform inline-block"
