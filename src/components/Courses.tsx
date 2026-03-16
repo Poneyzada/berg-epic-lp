@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Diamond, Infinity, Anchor, ArrowUpRight, Users, Clock, ShieldCheck, MessageCircle } from 'lucide-react';
 import { CourseDetailModal } from './CourseDetailModal';
+import { useTranslation } from 'react-i18next';
 
-const courses = [
+const courseData = [
   {
     id: 'slx',
-    title: 'Conceitos da "Single Leg X"',
-    desc: 'O domínio absoluto da guarda mais eficiente do BJJ moderno.',
+    titlePt: 'Conceitos da "Single Leg X"',
+    titleEn: 'Single Leg X Concepts',
+    descPt: 'O domínio absoluto da guarda mais eficiente do BJJ moderno.',
+    descEn: 'Absolute mastery of the most efficient guard in modern BJJ.',
     price: 'R$ 197,00',
     checkout: 'https://sun.eduzz.com/1441320?cupom=SLE100',
     icon: Anchor,
@@ -15,24 +18,29 @@ const courses = [
     accent: 'text-blue-500',
     image: '/courses/PRESSÃO FAZ DIAMANTES (1).avif',
     tier: 'Essencial',
-    hook: 'Aprenda a minha estratégia pessoal para entrar na guarda e me manter no Jogo da Single Leg X.',
-    benefits: [
-      { icon: Users, label: 'Todos os Níveis' },
-      { icon: ShieldCheck, label: 'Qualidade 4K' },
-      { icon: Clock, label: '5 Anos de Acesso' },
-      { icon: MessageCircle, label: 'Suporte Direto' }
-    ],
-    modules: [
+    hookPt: 'Aprenda a minha estratégia pessoal para entrar na guarda e me manter no Jogo da Single Leg X.',
+    hookEn: 'Learn my personal strategy to enter the guard and stay in the Single Leg X game.',
+    benefitsPt: ['Todos os Níveis', 'Qualidade 4K', '5 Anos de Acesso', 'Suporte Direto'],
+    benefitsEn: ['All Levels', '4K Quality', '5 Years Access', 'Direct Support'],
+    modulesPt: [
       'Módulo 1: 9 Entradas detalhadas e batidas em baixo.',
       'Módulo 2: Desequilíbrios, pegadas certas e antecipação.',
       'Módulo 3: Raspagens Twist, Balão e X Invertido.',
       'Bônus: 20 posições extras de raspagens e entradas.'
+    ],
+    modulesEn: [
+      'Module 1: 9 detailed entries and low sweeps.',
+      'Module 2: Off-balancing, correct grips and anticipation.',
+      'Module 3: Twist, Balloon and Inverted X sweeps.',
+      'Bonus: 20 extra sweep and entry positions.'
     ]
   },
   {
     id: 'pressao',
-    title: 'Pressão Faz Diamantes',
-    desc: 'A arte de esmagar resistências e evoluir como professor ou competidor.',
+    titlePt: 'Pressão Faz Diamantes',
+    titleEn: 'Pressure Makes Diamonds',
+    descPt: 'A arte de esmagar resistências e evoluir como professor ou competidor.',
+    descEn: 'The art of crushing resistance and evolving as a coach or competitor.',
     price: 'R$ 247,00',
     checkout: 'https://sun.eduzz.com/1818927',
     icon: Diamond,
@@ -40,24 +48,29 @@ const courses = [
     accent: 'text-white',
     image: '/courses/SINGLE LEG X (1).avif',
     tier: 'Performance',
-    hook: 'Incorpore minhas formas favoritas de Leg Weave e passagens de pressão segura e eficiente.',
-    benefits: [
-      { icon: Users, label: 'Ideal p/ Professores' },
-      { icon: ShieldCheck, label: 'Alta Definição' },
-      { icon: Clock, label: '12 Meses Acesso' },
-      { icon: MessageCircle, label: 'Grupo Telegram VIP' }
-    ],
-    modules: [
+    hookPt: 'Incorpore minhas formas favoritas de Leg Weave e passagens de pressão segura e eficiente.',
+    hookEn: 'Incorporate my favorite Leg Weave entries and safe, efficient pressure passing.',
+    benefitsPt: ['Ideal p/ Professores', 'Alta Definição', '12 Meses Acesso', 'Grupo Telegram VIP'],
+    benefitsEn: ['Ideal for Coaches', 'High Definition', '12 Months Access', 'VIP Telegram Group'],
+    modulesPt: [
       'Leg Weave: Entradas e variantes favoritas.',
       'Performance: Estudo extra tatame para evolução acelerada.',
       'Planos de Aula: Ideal para professores estruturarem treinos.',
       'Telegram: Estudos semanais e novas variações exclusivas.'
+    ],
+    modulesEn: [
+      'Leg Weave: Favorite entries and variants.',
+      'Performance: Off-mat study for accelerated evolution.',
+      'Lesson Plans: Ideal for coaches to structure training.',
+      'Telegram: Weekly studies and exclusive new variations.'
     ]
   },
   {
     id: '5050',
-    title: 'Anulando a 50/50 e Lapelas',
-    desc: 'Mecanismos por trás da 50/50 e Lapelas para anular o jogo adversário.',
+    titlePt: 'Anulando a 50/50 e Lapelas',
+    titleEn: 'Nullifying 50/50 and Lapels',
+    descPt: 'Mecanismos por trás da 50/50 e Lapelas para anular o jogo adversário.',
+    descEn: 'Mechanisms behind 50/50 and Lapels to shut down your opponent\'s game.',
     price: 'R$ 247,00',
     checkout: 'https://sun.eduzz.com/1351752',
     icon: Infinity,
@@ -65,24 +78,41 @@ const courses = [
     accent: 'text-blue-500',
     image: '/courses/5050 E LAPELAS (1).avif',
     tier: 'Avançado / Lapelas',
-    hook: '45+ posições (2h30) focadas em entender e destruir o mecanismo das guardas de lapela.',
-    benefits: [
-      { icon: Users, label: 'Intermed./Avançado' },
-      { icon: ShieldCheck, label: 'Aplicação Real' },
-      { icon: Clock, label: '12 Meses Acesso' },
-      { icon: MessageCircle, label: 'Grupo Telegram VIP' }
-    ],
-    modules: [
+    hookPt: '45+ posições (2h30) focadas em entender e destruir o mecanismo das guardas de lapela.',
+    hookEn: '45+ positions (2h30) focused on understanding and destroying lapel guard mechanics.',
+    benefitsPt: ['Intermed./Avançado', 'Aplicação Real', '12 Meses Acesso', 'Grupo Telegram VIP'],
+    benefitsEn: ['Intermediate/Advanced', 'Real Application', '12 Months Access', 'VIP Telegram Group'],
+    modulesPt: [
       'Módulo 1: Anulando a 50/50 (antecipação e passagens).',
       'Módulo 2: Guardas de Lapela (Shield e Knee Cut).',
       'Módulo 3: Passando Worm Guard (Partes 1-6).',
       'Módulo 4: Passando Squid Guard e Fio Dental.'
+    ],
+    modulesEn: [
+      'Module 1: Nullifying 50/50 (anticipation and passes).',
+      'Module 2: Lapel Guards (Shield and Knee Cut).',
+      'Module 3: Passing Worm Guard (Parts 1-6).',
+      'Module 4: Passing Squid Guard and Berimbolo Defense.'
     ]
   }
 ];
 
 export const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState<any | null>(null);
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language === 'en';
+
+  const courses = courseData.map(c => ({
+    ...c,
+    title: isEn ? c.titleEn : c.titlePt,
+    desc: isEn ? c.descEn : c.descPt,
+    hook: isEn ? c.hookEn : c.hookPt,
+    benefits: (isEn ? c.benefitsEn : c.benefitsPt).map((label, i) => ({
+      icon: [Users, ShieldCheck, Clock, MessageCircle][i],
+      label,
+    })),
+    modules: isEn ? c.modulesEn : c.modulesPt,
+  }));
 
   return (
     <section id="courses" className="py-32 px-4 relative bg-black">
@@ -95,14 +125,14 @@ export const Courses = () => {
                 <div className="w-6" />
                 <div />
               </div>
-              <h2 className="text-blue-500 font-bold tracking-[0.4em] uppercase text-sm">Protocolo Berg</h2>
+              <h2 className="text-blue-500 font-bold tracking-[0.4em] uppercase text-sm">{t('courses.badge')}</h2>
             </div>
             <h3 className="text-6xl md:text-8xl font-black uppercase leading-none italic tracking-tighter">
-              MEUS <br /> CURSOS.
+              {t('courses.title1')} <br /> {t('courses.title2')}
             </h3>
           </div>
           <p className="text-white/70 text-sm uppercase tracking-widest max-w-xs text-right font-data">
-            A metodologia que transformou o cenário do Jiu-Jitsu competitivo.
+            {t('courses.subtitle')}
           </p>
         </div>
 
@@ -125,7 +155,6 @@ export const Courses = () => {
                 onClick={() => setSelectedCourse(course)}
                 className="relative bg-[#050505] rounded-[2rem] p-10 h-full flex flex-col border border-white/5 overflow-hidden cursor-pointer"
               >
-                {/* Background Pattern / Image Fallback */}
                 <div className="absolute inset-0 opacity-10 grayscale group-hover:opacity-20 transition-opacity pointer-events-none flex items-center justify-center">
                    <img src={course.image} className="w-full h-full object-cover object-center" />
                 </div>
@@ -135,7 +164,7 @@ export const Courses = () => {
                   <div className={`p-4 rounded-2xl bg-white/5 border border-white/10 ${course.accent} group-hover:scale-110 transition-transform duration-500`}>
                     <course.icon className="w-8 h-8" />
                   </div>
-                  <ArrowUpRight className="text-white/20 group-hover:text-blue-500 transition-colors" />
+                  <ArrowUpRight className="text-white/40 group-hover:text-blue-500 transition-colors" />
                 </div>
 
                 <h4 className="text-3xl font-black uppercase mb-4 leading-none tracking-tight group-hover:translate-x-2 transition-transform duration-500 relative z-10">
@@ -150,7 +179,7 @@ export const Courses = () => {
                     {course.price.split(',')[0]}
                   </div>
                   <button className="text-[8px] font-black uppercase tracking-widest text-blue-500 hover:text-white transition-colors border border-blue-500/20 px-2.5 py-1 rounded-full">
-                    Ver Detalhes
+                    {t('courses.details')}
                   </button>
                 </div>
 

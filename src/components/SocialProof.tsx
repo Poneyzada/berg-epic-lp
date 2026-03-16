@@ -1,21 +1,35 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Star, Trophy, Users, Globe } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+
+const testimonialsPt = [
+  { name: "Aluno Graduado", text: "O curso de Single Leg X mudou meu jogo. Os detalhes 4K fazem toda a diferença." },
+  { name: "Professor BJJ", text: "Uso os planos de aula do curso de Pressão em minha academia. Conteúdo de altíssimo nível." },
+  { name: "Competidor", text: "Anular a 50/50 era meu maior problema. Berg explicou o mecanismo de forma clara." },
+  { name: "Faixa Azul", text: "Didática impecável. Parece que ele está do seu lado no tatame corrigindo a pegada." },
+  { name: "Faixa Preta", text: "Refinei detalhes que nem imaginava que existiam. O nível de estudo do Berg é absurdo." },
+  { name: "Praticante", text: "Melhor investimento que fiz no meu Jiu-Jitsu. Recomendo a todos que querem evoluir." }
+];
+
+const testimonialsEn = [
+  { name: "Graduated Student", text: "The Single Leg X course changed my game. The 4K details make all the difference." },
+  { name: "BJJ Professor", text: "I use the lesson plans from the Pressure course at my academy. Outstanding content." },
+  { name: "Competitor", text: "Shutting down 50/50 was my biggest problem. Berg explained the mechanism clearly." },
+  { name: "Blue Belt", text: "Impeccable teaching. It feels like he's right next to you on the mat correcting your grip." },
+  { name: "Black Belt", text: "I refined details I never knew existed. Berg's level of study is incredible." },
+  { name: "Practitioner", text: "Best investment I made in my Jiu-Jitsu. I recommend it to everyone who wants to evolve." }
+];
 
 export const SocialProof = () => {
-  const testimonials = [
-    { name: "Aluno Graduado", text: "O curso de Single Leg X mudou meu jogo. Os detalhes 4K fazem toda a diferença.", rating: 5 },
-    { name: "Professor BJJ", text: "Uso os planos de aula do curso de Pressão em minha academia. Conteúdo de elite.", rating: 5 },
-    { name: "Competidor Elite", text: "Anular a 50/50 era meu maior problema. Berg explicou o mecanismo de forma clara.", rating: 5 },
-    { name: "Faixa Azul", text: "Didática impecável. Parece que ele está do seu lado no tatame corrigindo a pegada.", rating: 5 },
-    { name: "Faixa Preta", text: "Refinei detalhes que nem imaginava que existiam. O nível de estudo do Berg é absurdo.", rating: 5 },
-    { name: "Praticante", text: "Melhor investimento que fiz no meu Jiu-Jitsu. Recomendo a todos que querem evoluir.", rating: 5 }
-  ];
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language === 'en';
+  const testimonials = isEn ? testimonialsEn : testimonialsPt;
 
   const stats = [
-    { icon: Users, value: "769+", label: "Alunos Ativos" },
-    { icon: Globe, value: "20+", label: "Países" },
-    { icon: Trophy, value: "Elite", label: "Metodologia" }
+    { icon: Users, value: "769+", label: t('social.stats.students') },
+    { icon: Globe, value: "20+", label: t('social.stats.countries') },
+    { icon: Trophy, value: "BJJ", label: t('social.stats.method') },
   ];
 
   return (
@@ -37,7 +51,7 @@ export const SocialProof = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-32 left-6 md:bottom-10 md:left-10 z-10">
                 <h4 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter">Gutemberg Pereira</h4>
-                <p className="text-white/65 text-[10px] uppercase font-bold tracking-[0.4em] mt-2">Atleta Campeão Mundial</p>
+                <p className="text-white/70 text-[10px] uppercase font-bold tracking-[0.4em] mt-2">{t('social.champion')}</p>
               </div>
             </div>
             
@@ -61,24 +75,18 @@ export const SocialProof = () => {
             className="space-y-8"
           >
             <div>
-              <h2 className="text-sm font-data font-black uppercase tracking-[0.5em] text-white/60 mb-4">
-                A Jornada
+              <h2 className="text-sm font-data font-black uppercase tracking-[0.5em] text-white/65 mb-4">
+                {t('social.journey')}
               </h2>
               <h3 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none mb-8">
-                AUTORIDADE <br /> NO TATAME.
+                {t('social.title').split('\n')[0]} <br /> {t('social.title').split('\n')[1]}
               </h3>
             </div>
             
             <div className="space-y-6 text-white/80 text-sm md:text-lg font-data leading-relaxed">
-              <p>
-                Natural de Salvador, Bahia, Gutemberg Pereira iniciou sua jornada no Jiu-Jitsu aos 15 anos. Com o sonho de ser um grande campeão, mudou-se para o Rio de Janeiro onde viveu a realidade de morar e treinar 100% focado no tatame.
-              </p>
-              <p>
-                Os resultados não tardaram: múltiplas coroas como Campeão Mundial, Pan-Americano e Brasileiro. Nos Estados Unidos, onde viveu por 5 anos, elevou sua compreensão sobre alta performance e o marketing necessário para atletas de elite.
-              </p>
-              <p>
-                Hoje, como um atleta independente patrocinado pela Adidas, Gutemberg viaja o mundo lutando e compartilhando sua metodologia através de cursos e seminários, transformando milhares de alunos em especialistas na arte suave.
-              </p>
+              <p>{t('social.bio1')}</p>
+              <p>{t('social.bio2')}</p>
+              <p>{t('social.bio3')}</p>
             </div>
           </motion.div>
         </div>
@@ -86,12 +94,12 @@ export const SocialProof = () => {
         {/* Testimonials Grid */}
         <div className="space-y-16">
           <div className="text-center">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-white/50 mb-4">Prova Social</h3>
-            <h4 className="text-3xl md:text-5xl font-black uppercase italic">Voz dos Especialistas.</h4>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-white/55 mb-4">{t('social.proof')}</h3>
+            <h4 className="text-3xl md:text-5xl font-black uppercase italic">{t('social.proofTitle')}</h4>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
+            {testimonials.map((testimonial, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -104,9 +112,9 @@ export const SocialProof = () => {
                 </div>
                 <div className="relative">
                   <Quote size={24} className="absolute -top-4 -left-4 text-white/5" />
-                  <p className="text-white/80 font-data italic leading-relaxed text-sm">"{t.text}"</p>
+                  <p className="text-white/85 font-data italic leading-relaxed text-sm">"{testimonial.text}"</p>
                 </div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/60 mt-auto">— {t.name}</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/65 mt-auto">— {testimonial.name}</p>
               </motion.div>
             ))}
           </div>

@@ -1,49 +1,34 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { t } = useTranslation();
 
-  const questions = [
-    {
-      q: "O acesso ao conteúdo é imediato?",
-      a: "Sim! Após a confirmação do pagamento, você recebe imediatamente no seu e-mail os dados de acesso à nossa plataforma exclusiva."
-    },
-    {
-      q: "Posso acessar de qualquer dispositivo?",
-      a: "Com certeza. Nossa plataforma é 100% otimizada para tablets, computadores e celulares, permitindo que você estude até mesmo dentro do tatame."
-    },
-    {
-      q: "Qual o prazo de acesso ao curso?",
-      a: "O curso de Single Leg X oferece 5 anos de acesso. Os cursos de Pressão e 50/50 e Lapelas oferecem 12 meses de acesso completo."
-    },
-    {
-      q: "Quais as formas de pagamento?",
-      a: "Aceitamos Cartão de Crédito (com parcelamento em até 12x), PIX à vista e boleto bancário."
-    },
-    {
-      q: "Existe suporte para dúvidas?",
-      a: "Sim. Você terá um canal direto via e-mail para tirar todas as suas dúvidas técnicas sobre as posições ensinadas."
-    }
-  ];
+  const questions = t('faq.questions', { returnObjects: true }) as Array<{ q: string; a: string }>;
 
   return (
     <section id="faq" className="py-24 md:py-32 bg-black">
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
-            <HelpCircle size={14} className="text-white/60" />
-            <span className="text-[10px] font-black uppercase tracking-widest text-white/80">Dúvidas Frequentes</span>
+            <HelpCircle size={14} className="text-white/65" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-white/80">{t('faq.badge')}</span>
           </div>
-          <h3 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter">PROTOCOLO DE <br /> SEGURANÇA.</h3>
+          <h3 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter">
+            {t('faq.title').split('\n').map((line, i) => (
+              <React.Fragment key={i}>{line}{i === 0 && <br />}</React.Fragment>
+            ))}
+          </h3>
         </div>
 
         <div className="space-y-4">
           {questions.map((item, i) => (
             <div 
               key={i}
-              className="border border-white/5 rounded-2xl overflow-hidden bg-zinc-900/30"
+              className="border border-white/10 rounded-2xl overflow-hidden bg-zinc-900/30"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -54,7 +39,7 @@ export const FAQ = () => {
                 </span>
                 <ChevronDown 
                   size={18} 
-                  className={`text-white/50 transition-transform duration-500 ${openIndex === i ? 'rotate-180' : ''}`}
+                  className={`text-white/55 transition-transform duration-500 ${openIndex === i ? 'rotate-180' : ''}`}
                 />
               </button>
               
@@ -66,7 +51,7 @@ export const FAQ = () => {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="px-6 pb-6 text-xs md:text-sm text-white/75 font-data leading-relaxed">
+                    <div className="px-6 pb-6 text-xs md:text-sm text-white/75 font-data leading-relaxed border-t border-white/5 pt-4">
                       {item.a}
                     </div>
                   </motion.div>
@@ -76,8 +61,8 @@ export const FAQ = () => {
           ))}
         </div>
 
-        <div className="mt-20 p-8 border border-white/5 rounded-3xl bg-zinc-900 text-center">
-           <p className="text-[10px] font-black uppercase tracking-widest text-white/60 mb-4">Ainda tem dúvidas?</p>
+        <div className="mt-20 p-8 border border-white/10 rounded-3xl bg-zinc-900 text-center">
+           <p className="text-[10px] font-black uppercase tracking-widest text-white/65 mb-4">{t('faq.contact')}</p>
            <a 
             href="mailto:gupereirabjj@hotmail.com" 
             className="text-white font-black uppercase italic hover:scale-105 transition-transform inline-block"

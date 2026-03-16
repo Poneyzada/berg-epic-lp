@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, PlayCircle, Star, X, ChevronDown, ArrowRight } from 'lucide-react';
+import { Play, PlayCircle, X, ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const FreeTechniques = () => {
   const [selectedVideo, setSelectedVideo] = useState<{title: string, vimeo_url: string} | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = useTranslation();
 
-  // ONLY the 10 videos from the old site
   const techniques = [
-    { title: "Raspagem da Laçada com X", vimeo_id: "801469119", category: "Free Technique", image: "/images/berg-piramide.jpg" },
-    { title: "Laçada com X (variações)", vimeo_id: "801465244", category: "Free Technique", image: "/images/berg-rosto.jpg" },
-    { title: "Worm guard raspagem de quadrilzada", vimeo_id: "801463480", category: "Free Technique", image: "/images/berg-blur.jpg" },
-    { title: "worm guard ida para as costas", vimeo_id: "801461288", category: "Free Technique", image: "/images/berg-rosto.jpg" },
-    { title: "controle e ida para as costas (4 apoios)", vimeo_id: "801457731", category: "Free Technique", image: "/images/berg-piramide.jpg" },
-    { title: "controle e ida para as costas 2 (4 apoios)", vimeo_id: "801454947", category: "Free Technique", image: "/images/berg-blur.jpg" },
-    { title: "Ataques da guarda fechada 1", vimeo_id: "801452292", category: "Free Technique", image: "/images/berg-rosto.jpg" },
-    { title: "Ataques da guarda fechada 2", vimeo_id: "801450379", category: "Free Technique", image: "/images/berg-piramide.jpg" },
-    { title: "Controle do 4 apoios com finalizacao", vimeo_id: "801445532", category: "Free Technique", image: "/images/berg-blur.jpg" },
-    { title: "Long Step", vimeo_id: "801442111", category: "Free Technique", image: "/images/berg-rosto.jpg" }
+    { title: "Raspagem da Laçada com X", vimeo_id: "801469119", image: "/images/berg-piramide.jpg" },
+    { title: "Laçada com X (variações)", vimeo_id: "801465244", image: "/images/berg-rosto.jpg" },
+    { title: "Worm guard raspagem de quadrilzada", vimeo_id: "801463480", image: "/images/berg-blur.jpg" },
+    { title: "worm guard ida para as costas", vimeo_id: "801461288", image: "/images/berg-rosto.jpg" },
+    { title: "controle e ida para as costas (4 apoios)", vimeo_id: "801457731", image: "/images/berg-piramide.jpg" },
+    { title: "controle e ida para as costas 2 (4 apoios)", vimeo_id: "801454947", image: "/images/berg-blur.jpg" },
+    { title: "Ataques da guarda fechada 1", vimeo_id: "801452292", image: "/images/berg-rosto.jpg" },
+    { title: "Ataques da guarda fechada 2", vimeo_id: "801450379", image: "/images/berg-piramide.jpg" },
+    { title: "Controle do 4 apoios com finalizacao", vimeo_id: "801445532", image: "/images/berg-blur.jpg" },
+    { title: "Long Step", vimeo_id: "801442111", image: "/images/berg-rosto.jpg" }
   ];
 
   const featured = techniques.slice(0, 3);
@@ -36,15 +37,17 @@ export const FreeTechniques = () => {
                 <div className="!w-2" />
                 <div className="!w-4" />
               </div>
-              <h2 className="text-blue-500 font-bold tracking-widest uppercase text-xs font-data">Conteúdo Gratuito</h2>
+              <h2 className="text-blue-500 font-bold tracking-widest uppercase text-xs font-data">{t('free.badge')}</h2>
             </div>
-            <h3 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic">Acervo <br />Técnico</h3>
+            <h3 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic">
+              {t('free.title1')} <br />{t('free.title2')}
+            </h3>
           </div>
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
-            className="group flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors font-data"
+            className="group flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white transition-colors font-data"
           >
-            {isExpanded ? 'Recolher Biblioteca' : 'Ver Todos os Vídeos'}
+            {isExpanded ? t('free.collapse') : t('free.expand')}
             <ArrowRight className={`w-4 h-4 transition-transform duration-500 ${isExpanded ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
           </button>
         </div>
@@ -79,7 +82,7 @@ export const FreeTechniques = () => {
               </div>
 
               <div className="absolute top-4 right-4 px-3 py-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                Qualidade 4K
+                {t('free.quality')}
               </div>
             </motion.div>
           ))}
@@ -106,7 +109,7 @@ export const FreeTechniques = () => {
                   <div className="relative aspect-video rounded-xl overflow-hidden mb-4 grayscale group-hover:grayscale-0 transition-all">
                     <img src={tech.image} className="w-full h-full object-cover grayscale opacity-40 group-hover:opacity-100" />
                     <div className="absolute inset-0 flex items-center justify-center">
-                       <PlayCircle size={24} className="text-white/40 group-hover:text-white group-hover:scale-110 transition-all" />
+                       <PlayCircle size={24} className="text-white/60 group-hover:text-white group-hover:scale-110 transition-all" />
                     </div>
                   </div>
                   <h4 className="text-[11px] font-black uppercase italic leading-tight mb-2 line-clamp-2">{tech.title}</h4>
