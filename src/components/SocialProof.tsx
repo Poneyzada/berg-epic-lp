@@ -42,7 +42,7 @@ export const SocialProof = () => {
             </div>
             
             {/* Stats Overlay */}
-            <div className="absolute -bottom-6 -right-6 md:right-10 bg-white text-black p-8 rounded-3xl hidden md:flex flex-col gap-6 shadow-[0_30px_60px_rgba(255,255,255,0.1)]">
+            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:-right-6 md:right-10 bg-white text-black p-6 md:p-8 rounded-3xl flex flex-col gap-4 md:gap-6 shadow-[0_30px_60px_rgba(255,255,255,0.1)] z-20 w-[80%] md:w-auto">
                {stats.map((stat, i) => (
                  <div key={i} className="flex items-center gap-4 border-b border-black/5 pb-4 last:border-0 last:pb-0">
                     <stat.icon size={20} />
