@@ -45,15 +45,23 @@ export const Hero = () => {
 
       {/* Content Container */}
       <div className="relative z-20 h-full max-w-7xl mx-auto px-6 flex flex-col justify-end pb-24 md:pb-32">
-        {/* YouTube Button - Mobile Optimized */}
-        <div className="absolute top-8 md:top-1/2 md:-translate-y-1/2 right-6 z-30 flex flex-col gap-4 text-white/60">
+        {/* Social Action Buttons - PC (Shoulder) & Mobile (Under Header) */}
+        <div className="absolute top-32 md:top-1/2 md:-translate-y-1/2 right-6 z-30 flex flex-col gap-4">
             <a 
-              href="https://www.youtube.com/@GuPereira/featured"
+              href="https://www.youtube.com/@GuPereira"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm"
+              className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/40"
             >
               <Youtube className="group-hover:scale-110 transition-transform w-5 h-5 md:w-6 md:h-6" />
+            </a>
+            <a 
+              href="https://www.instagram.com/gupereirabjj/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/40"
+            >
+              <Instagram className="group-hover:scale-110 transition-transform w-5 h-5 md:w-6 md:h-6" />
             </a>
         </div>
 
