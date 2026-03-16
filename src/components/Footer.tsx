@@ -50,8 +50,8 @@ export const Footer = () => {
             © 2025 Gutemberg Pereira. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-4 grayscale opacity-20 hover:opacity-100 transition-opacity">
-             <span className="text-[8px] uppercase font-black tracking-widest">Desenvolvido por</span>
-             <span className="text-xs font-black tracking-tighter">TREVO FILMS</span>
+             <span className="text-[8px] uppercase font-black tracking-widest text-white/40">DESIGN & DEV</span>
+             <span className="text-xs font-black tracking-tighter hover:text-white transition-colors cursor-default">TRÍADE STUDIO</span>
           </div>
         </div>
       </div>
