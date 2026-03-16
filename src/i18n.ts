@@ -36,7 +36,7 @@ const resources = {
             cta: 'Ver Protocolo Essencial',
           },
           {
-            title: 'Conexão Profunda',
+            title: 'Pressão Decisiva',
             desc: 'A ciência da pressão deadweight aplicada à passagem de guarda. Onde o equilíbrio do oponente desmorona. (Foco em Pressão)',
             mood: 'Conexão Neural',
             cta: 'Dominar a Pressão',

@@ -143,10 +143,10 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
             </div>
 
             <div className="flex-1 z-10 relative">
-               <span className="text-6xl md:text-[14rem] font-black text-white/[0.03] font-data absolute -top-20 -left-10 leading-none">
+               <span className="text-[5rem] md:text-[14rem] font-black text-white/10 md:text-white/[0.03] font-data absolute top-0 left-0 md:-top-20 md:-left-10 leading-none pointer-events-none select-none">
                   {ids[i]}
                </span>
-               <h3 className="text-white text-5xl md:text-8xl font-black uppercase italic mb-8 tracking-tighter leading-[0.8]">
+               <h3 className="text-white text-4xl md:text-8xl font-black uppercase italic mb-8 tracking-tighter leading-[0.85] pt-16 md:pt-0">
                   {step.title.split(' ')[0]} <br />
                   <span className="font-drama text-white italic">{step.title.split(' ').slice(1).join(' ')}</span>
                </h3>
