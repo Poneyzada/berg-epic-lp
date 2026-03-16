@@ -68,7 +68,7 @@ export const Philosophy = () => {
       
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div ref={textRef} className="text-center">
-          <p className="manifesto-reveal text-[10px] font-data font-bold text-white/40 uppercase tracking-[0.6em] mb-16">
+          <p className="manifesto-reveal text-[10px] font-data font-bold text-white/60 uppercase tracking-[0.6em] mb-16">
             O Protocolo Inabalável
           </p>
           
@@ -79,7 +79,7 @@ export const Philosophy = () => {
 
           <div className="manifesto-reveal h-px w-32 bg-white/20 mx-auto mb-16" />
 
-          <p className="manifesto-reveal text-xl md:text-3xl text-white/60 font-medium max-w-4xl mx-auto leading-relaxed italic uppercase tracking-tight">
+          <p className="manifesto-reveal text-xl md:text-3xl text-white/75 font-medium max-w-4xl mx-auto leading-relaxed italic uppercase tracking-tight">
             "Não é sobre força bruta. É sobre a <span className="text-white">conexão invisível</span> entre gravidade, alavanca e o colapso estrutural do oponente."
           </p>
         </div>
@@ -117,7 +117,7 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
       desc: 'O ápice do protocolo. Onde a técnica absoluta se traduz em domínio inquestionável no tatame.',
       video: '/videos/berg-war.mp4',
       mood: 'Execução Final',
-      cta: 'Acessar Elite Sovereignty',
+      cta: 'Acessar Soberania Total',
       target: '#5050'
     }
   ];
@@ -182,7 +182,7 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
                   {step.title.split(' ')[0]} <br />
                   <span className="font-drama text-white italic">{step.title.split(' ')[1]}</span>
                </h3>
-                <p className="text-white/40 text-sm md:text-lg uppercase tracking-widest leading-relaxed mb-12 max-w-xl font-data">
+                <p className="text-white/60 text-sm md:text-lg uppercase tracking-widest leading-relaxed mb-12 max-w-xl font-data">
                   {step.desc}
                 </p>
                 <div className="mb-16">

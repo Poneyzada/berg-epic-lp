@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Instagram, Youtube } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 interface NavbarProps {
   onSeminarClick: () => void;
@@ -11,6 +13,8 @@ interface NavbarProps {
 export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
+  const [lang, setLang] = useState<'pt' | 'en'>(i18n.language as 'pt' | 'en');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,10 +24,16 @@ export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleLang = () => {
+    const next = lang === 'pt' ? 'en' : 'pt';
+    i18n.changeLanguage(next);
+    setLang(next);
+  };
+
   const navLinks = [
-    { name: 'Metodologia', href: '#philosophy' },
-    { name: 'Cursos', href: '#courses' },
-    { name: 'Técnicas', href: '#free' },
+    { name: t('navbar.metodologia'), href: '#philosophy' },
+    { name: t('navbar.cursos'), href: '#courses' },
+    { name: t('navbar.free'), href: '#free' },
   ];
 
   return (
@@ -58,7 +68,7 @@ export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
                   }
                   if (mobileMenuOpen) setMobileMenuOpen(false);
                 }}
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors"
+                className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
               >
                 {link.name}
               </a>
@@ -66,36 +76,46 @@ export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
           </div>
 
           {/* Actions & Toggle */}
-          <div className="flex items-center gap-2 md:gap-6">
-            {/* Social Icons - Visible on all screen sizes, subtle on mobile */}
-            <div className="flex items-center gap-3 md:gap-4 md:border-r md:border-white/10 md:pr-6 md:mr-2">
+          <div className="flex items-center gap-2 md:gap-4">
+            {/* Social Icons */}
+            <div className="flex items-center gap-3 md:gap-4 md:border-r md:border-white/10 md:pr-4 md:mr-1">
               <a 
                 href="https://www.instagram.com/euberg10?igsh=MmNveG9qdTZja3Zp"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/40"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/60"
               >
-                <Instagram size={14} className="md:w-4 md:h-4" />
+                <Instagram size={13} className="md:w-[14px] md:h-[14px]" />
               </a>
               <a 
                 href="https://www.youtube.com/@GuPereira"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/40"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/60"
               >
-                <Youtube size={14} className="md:w-4 md:h-4" />
+                <Youtube size={13} className="md:w-[14px] md:h-[14px]" />
               </a>
             </div>
+
+            {/* Language Toggle Button */}
+            <button
+              onClick={toggleLang}
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/20 hover:border-white/50 transition-all text-[10px] font-black uppercase tracking-[0.2em] text-white/70 hover:text-white"
+            >
+              <span className={lang === 'pt' ? 'text-white' : 'text-white/30'}>PT</span>
+              <span className="text-white/20">|</span>
+              <span className={lang === 'en' ? 'text-white' : 'text-white/30'}>EN</span>
+            </button>
             
             <button 
               onClick={onSeminarClick}
               className="hidden md:block btn-magnetic btn-primary px-6 py-2"
             >
-              Seminários
+              {t('navbar.seminarios')}
             </button>
 
             <button 
-              className="md:hidden p-2 text-white/60 hover:text-white"
+              className="md:hidden p-2 text-white/70 hover:text-white"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -125,11 +145,24 @@ export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
                       onSeminarClick();
                     }
                   }}
-                  className="text-lg font-bold uppercase tracking-widest text-center py-2 border-b border-white/5"
+                  className="text-lg font-bold uppercase tracking-widest text-center py-2 border-b border-white/5 text-white/80 hover:text-white transition-colors"
                 >
                   {link.name}
                 </a>
               ))}
+
+              {/* Language Toggle - Mobile */}
+              <div className="flex justify-center">
+                <button
+                  onClick={toggleLang}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 text-[11px] font-black uppercase tracking-[0.2em]"
+                >
+                  <span className={lang === 'pt' ? 'text-white' : 'text-white/30'}>Português</span>
+                  <span className="text-white/20">|</span>
+                  <span className={lang === 'en' ? 'text-white' : 'text-white/30'}>English</span>
+                </button>
+              </div>
+
               <button 
                 onClick={() => {
                   setMobileMenuOpen(false);
@@ -137,7 +170,7 @@ export const Navbar = ({ onSeminarClick, onFilterClick }: NavbarProps) => {
                 }}
                 className="btn-magnetic btn-primary w-full"
               >
-                Seminários
+                {t('navbar.seminarios')}
               </button>
             </div>
           </motion.div>

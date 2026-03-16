@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronRight, Youtube, Instagram } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,29 +45,11 @@ export const Hero = () => {
 
       {/* Content Container */}
       <div className="relative z-20 h-full max-w-7xl mx-auto px-6 flex flex-col justify-end pb-24 md:pb-32">
-        {/* Social Action Buttons - PC (Shoulder) & Mobile (Under Header) */}
-        <div className="absolute top-32 md:top-1/2 md:-translate-y-1/2 right-6 z-30 flex flex-col gap-4">
-            <a 
-              href="https://www.youtube.com/@GuPereira"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/40"
-            >
-              <Youtube className="group-hover:scale-110 transition-transform w-5 h-5 md:w-6 md:h-6" />
-            </a>
-            <a 
-              href="https://www.instagram.com/euberg10?igsh=MmNveG9qdTZja3Zp"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all group backdrop-blur-sm text-white/40"
-            >
-              <Instagram className="group-hover:scale-110 transition-transform w-5 h-5 md:w-6 md:h-6" />
-            </a>
-        </div>
+
 
         <div ref={textRef} className="max-w-3xl">
           <div className="hero-line overflow-hidden mb-4">
-            <span className="inline-block text-[10px] md:text-xs font-data font-black uppercase tracking-[0.5em] text-white/60">
+            <span className="inline-block text-[10px] md:text-xs font-data font-black uppercase tracking-[0.5em] text-white/75">
               Gutemberg Pereira apresenta:
             </span>
           </div>
@@ -75,7 +57,7 @@ export const Hero = () => {
             <span className="block">PROTOCOLO DE</span>
             <span className="block text-white/20">SOBERANIA.</span>
           </h1>
-          <p className="hero-line text-[10px] md:text-sm uppercase tracking-widest text-white/40 max-w-xl leading-relaxed mb-10 md:mb-12 font-data">
+          <p className="hero-line text-[10px] md:text-sm uppercase tracking-widest text-white/65 max-w-xl leading-relaxed mb-10 md:mb-12 font-data">
             A desconstrução matemática do Jiu-Jitsu. <br />
             Ciência aplicada ao peso, gravidade e domínio absoluto.
           </p>

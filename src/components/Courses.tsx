@@ -20,7 +20,7 @@ const courses = [
       { icon: Users, label: 'Todos os Níveis' },
       { icon: ShieldCheck, label: 'Qualidade 4K' },
       { icon: Clock, label: '5 Anos de Acesso' },
-      { icon: MessageCircle, label: 'Suporte Elite' }
+      { icon: MessageCircle, label: 'Suporte Direto' }
     ],
     modules: [
       'Módulo 1: 9 Entradas detalhadas e batidas em baixo.',
@@ -64,7 +64,7 @@ const courses = [
     color: 'hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.5)]',
     accent: 'text-blue-500',
     image: '/courses/5050 E LAPELAS (1).avif',
-    tier: 'Elite / Lapelas',
+    tier: 'Avançado / Lapelas',
     hook: '45+ posições (2h30) focadas em entender e destruir o mecanismo das guardas de lapela.',
     benefits: [
       { icon: Users, label: 'Intermed./Avançado' },
@@ -95,7 +95,7 @@ export const Courses = () => {
                 <div className="w-6" />
                 <div />
               </div>
-              <h2 className="text-blue-500 font-bold tracking-[0.4em] uppercase text-sm">Treinamento de Elite</h2>
+              <h2 className="text-blue-500 font-bold tracking-[0.4em] uppercase text-sm">Protocolo Berg</h2>
             </div>
             <h3 className="text-6xl md:text-8xl font-black uppercase leading-none italic tracking-tighter">
               MEUS <br /> CURSOS.

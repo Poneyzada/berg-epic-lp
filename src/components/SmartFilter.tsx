@@ -18,7 +18,7 @@ const questions = [
     options: [
       { id: 'white', label: 'Atleta em Formação (Branca/Azul)', icon: ChevronRight },
       { id: 'purple', label: 'Praticante Avançado (Roxa/Preta)', icon: ChevronRight },
-      { id: 'black', label: 'Competidor de Elite', icon: ChevronRight },
+      { id: 'black', label: 'Competidor', icon: ChevronRight },
     ]
   }
 ];

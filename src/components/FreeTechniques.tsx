@@ -38,11 +38,11 @@ export const FreeTechniques = () => {
               </div>
               <h2 className="text-blue-500 font-bold tracking-widest uppercase text-xs font-data">Conteúdo Gratuito</h2>
             </div>
-            <h3 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic">Biblioteca <br />de Elite</h3>
+            <h3 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic">Acervo <br />Técnico</h3>
           </div>
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
-            className="group flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors font-data"
+            className="group flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors font-data"
           >
             {isExpanded ? 'Recolher Biblioteca' : 'Ver Todos os Vídeos'}
             <ArrowRight className={`w-4 h-4 transition-transform duration-500 ${isExpanded ? 'rotate-90' : 'group-hover:translate-x-1'}`} />

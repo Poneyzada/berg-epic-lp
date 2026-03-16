@@ -47,7 +47,7 @@ export const CourseShowcase = () => {
                 <div className="w-6" />
                 <div />
               </div>
-              <h2 className="text-blue-500 font-bold tracking-[0.4em] uppercase text-sm">Treinamento de Elite</h2>
+              <h2 className="text-blue-500 font-bold tracking-[0.4em] uppercase text-sm">Protocolo Berg</h2>
             </div>
             <h3 className="text-6xl md:text-8xl font-black uppercase leading-none italic tracking-tighter">
               Domine <br /> o Tatame

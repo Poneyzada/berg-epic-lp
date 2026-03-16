@@ -8,7 +8,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-2xl font-black uppercase italic tracking-tighter mb-6">Gutemberg Pereira</h3>
-            <p className="text-white/40 text-xs md:text-sm font-data leading-relaxed max-w-sm mb-8">
+            <p className="text-white/60 text-xs md:text-sm font-data leading-relaxed max-w-sm mb-8">
               Levando o Jiu-Jitsu de Salvador para o mundo. Técnica, precisão e mentalidade campeã em cada detalhe.
             </p>
             <div className="flex gap-4">
@@ -23,7 +23,7 @@ export const Footer = () => {
 
           <div>
             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-8">Links Rápidos</h4>
-            <ul className="space-y-4 text-[11px] font-black uppercase tracking-widest text-white/60">
+            <ul className="space-y-4 text-[11px] font-black uppercase tracking-widest text-white/70">
               <li><a href="#courses" className="hover:text-white transition-colors">Cursos</a></li>
               <li><a href="#free" className="hover:text-white transition-colors">Técnicas Extras</a></li>
               <li><a href="#about" className="hover:text-white transition-colors">Sobre o Berg</a></li>
@@ -32,7 +32,7 @@ export const Footer = () => {
 
           <div>
             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-8">Suporte</h4>
-            <ul className="space-y-4 text-[11px] font-black uppercase tracking-widest text-white/60">
+            <ul className="space-y-4 text-[11px] font-black uppercase tracking-widest text-white/70">
               <li className="flex items-center gap-3">
                 <Mail size={14} className="text-white/20" />
                 <a href="mailto:gupereirabjj@hotmail.com" className="hover:text-white transition-colors lowercase">gupereirabjj@hotmail.com</a>

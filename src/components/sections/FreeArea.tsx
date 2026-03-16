@@ -25,9 +25,9 @@ export const FreeArea = () => {
               </div>
               <h2 className="text-blue-500 font-bold tracking-widest uppercase text-xs">Conteúdo Gratuito</h2>
             </div>
-            <h3 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic">Biblioteca <br />de Elite</h3>
+            <h3 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic">Acervo <br />Técnico</h3>
           </div>
-          <button className="group flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">
+          <button className="group flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors">
             Ver Todos os Vídeos
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
