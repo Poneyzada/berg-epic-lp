@@ -38,7 +38,7 @@ export const AdminDashboard = () => {
 
   const fetchLeads = async () => {
     try {
-      const response = await fetch('http://localhost:8000/leads');
+      const response = await fetch('/api/leads');
       const data = await response.json();
       setLeads(data);
     } catch (err) {

@@ -18,7 +18,7 @@ export const SeminarForm = () => {
     
     // Send to Backend
     try {
-      await fetch('http://localhost:8000/leads', {
+      await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

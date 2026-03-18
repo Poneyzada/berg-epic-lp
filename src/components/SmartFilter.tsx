@@ -82,7 +82,7 @@ export const SmartFilter = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     
     // Send to Python Backend
     try {
-      await fetch('http://localhost:8000/leads', {
+      await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
