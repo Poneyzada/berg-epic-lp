@@ -45,10 +45,75 @@ export const AdminDashboard = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState(false);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === 'berg-epic-2024') {
+      setIsAuthenticated(true);
+      setAuthError(false);
+    } else {
+      setAuthError(true);
+    }
+  };
 
   useEffect(() => {
-    fetchLeads();
-  }, []);
+    if (isAuthenticated) fetchLeads();
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#0D0D12] flex items-center justify-center p-6 selection:bg-rose-500 selection:text-white">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-md"
+        >
+          <div className="text-center mb-12">
+            <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+              <ShieldAlert className="text-rose-500" size={32} />
+            </div>
+            <h2 className="text-[10px] font-black text-white/40 uppercase tracking-[0.6em] mb-4">Security Protocol</h2>
+            <h3 className="text-4xl font-black uppercase italic tracking-tighter text-white">ACESSO <span className="text-rose-500">RESTRITO.</span></h3>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="relative group">
+              <input 
+                autoFocus
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="TOKEN DE ACESSO"
+                className={`w-full bg-white/5 border ${authError ? 'border-rose-500/50' : 'border-white/10'} rounded-2xl px-6 py-5 text-center text-sm font-black uppercase tracking-[0.3em] outline-none focus:border-white/40 transition-all text-white placeholder:text-white/10`}
+              />
+              {authError && (
+                <motion.p 
+                  initial={{ opacity: 0 }} 
+                  animate={{ opacity: 1 }} 
+                  className="text-[8px] font-black uppercase tracking-widest text-rose-500 text-center mt-4"
+                >
+                  Protocolo de segurança: Acesso Negado.
+                </motion.p>
+              )}
+            </div>
+            <button 
+              type="submit"
+              className="w-full py-5 bg-white text-black font-black uppercase italic tracking-tighter hover:bg-rose-500 hover:text-white transition-all rounded-2xl shadow-2xl active:scale-95"
+            >
+              AUTENTICAR SISTEMA
+            </button>
+          </form>
+
+          <p className="mt-12 text-[8px] text-center text-white/10 uppercase tracking-widest font-bold">
+            Authorized Personnel Only • Berg Official Platform v2.1
+          </p>
+        </motion.div>
+      </div>
+    );
+  }
 
   const fetchLeads = async () => {
     try {
@@ -233,13 +298,13 @@ const LeadsModule = ({ leads, refresh }: { leads: Lead[], refresh: () => void })
         <select 
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-[9px] font-black uppercase tracking-widest outline-none focus:border-white/40 cursor-pointer"
+          className="bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-[9px] font-black uppercase tracking-widest outline-none focus:border-white/40 cursor-pointer text-white appearance-none min-w-[180px]"
         >
-          <option value="all">Filtro: Todos</option>
-          <option value="Lead">Apenas Leads</option>
-          <option value="No Checkout">No Checkout</option>
-          <option value="Pago">Vendas (Pagas)</option>
-          <option value="Abandonado">Abandonos</option>
+          <option value="all" className="bg-[#121217] text-white">FILTRO: TODOS</option>
+          <option value="Lead" className="bg-[#121217] text-white">APENAS LEADS</option>
+          <option value="No Checkout" className="bg-[#121217] text-white">NO CHECKOUT</option>
+          <option value="Pago" className="bg-[#121217] text-white">VENDAS (PAGAS)</option>
+          <option value="Abandonado" className="bg-[#121217] text-white">ABANDONOS</option>
         </select>
       </div>
 
