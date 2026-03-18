@@ -49,10 +49,21 @@ class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         # Fetch from Supabase
-        leads = []
-        if supabase:
-            response = supabase.table("leads").select("*").order("created_at", desc=True).execute()
-            leads = response.data
+        if not supabase:
+            self.send_response(200) # Mantemos 200 para não quebrar o fetch, mas enviamos objeto de erro
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            diagnostic = {
+                "error": "Database not configured",
+                "detail": "SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY missing in Environment Variables",
+                "data": []
+            }
+            self.wfile.write(json.dumps(diagnostic).encode())
+            return
+
+        response = supabase.table("leads").select("*").order("created_at", desc=True).execute()
+        leads = response.data
 
         self.send_response(200)
         self.send_header('Content-type', 'application/json')

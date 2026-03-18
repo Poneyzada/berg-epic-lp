@@ -48,6 +48,14 @@ export const AdminDashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState(false);
+  const [dbStatus, setDbStatus] = useState<'connected' | 'pending' | 'error'>('pending');
+  const [isDemo, setIsDemo] = useState(false);
+
+  const mockLeads: Lead[] = [
+    { id: 1, nome: "Demo: Berg (Teste)", whatsapp: "(21) 99999-9999", interesse: "ICP: Pressão", status: "Lead", origem: "ICP", created_at: new Date().toISOString(), suggested_remarketing: "Oi Berg! Demo mode ativo." },
+    { id: 2, nome: "Demo: Alliance SP", whatsapp: "(11) 98888-8888", interesse: "Seminário: Passagem", status: "Solicitado", origem: "Seminar", created_at: new Date().toISOString(), suggested_remarketing: "Oi Alliance!", metadata: { local: "São Paulo, SP", data: "Junho/2024", publico: "100+ Alunos" } },
+    { id: 3, nome: "Demo: Carrinho Abandonado", whatsapp: "(31) 97777-7777", interesse: "Curso: Pressão faz Diamantes", status: "Abandonado", origem: "Checkout", created_at: new Date(Date.now() - 3600000).toISOString(), suggested_remarketing: "Oi! Notamos seu interesse..." }
+  ];
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,9 +67,58 @@ export const AdminDashboard = () => {
     }
   };
 
+  const enterDemoMode = () => {
+    setIsDemo(true);
+    setIsAuthenticated(true);
+    setLeads(mockLeads);
+    setDbStatus('pending');
+    setLoading(false);
+  };
+
   useEffect(() => {
-    if (isAuthenticated) fetchLeads();
-  }, [isAuthenticated]);
+    if (isAuthenticated && !isDemo) fetchLeads();
+  }, [isAuthenticated, isDemo]);
+
+  const fetchLeads = async () => {
+    try {
+      const response = await fetch('/api/leads');
+      if (!response.ok) throw new Error('API unreachable');
+      const data = await response.json();
+      
+      if (data.error === "Database not configured") {
+        setDbStatus('pending');
+        // No Vercel, se não tiver chaves, mostramos vazio OU forçamos demo se o user quiser
+      } else {
+        setLeads(Array.isArray(data) ? data : []);
+        setDbStatus('connected');
+      }
+    } catch (err) {
+      console.error('Error fetching leads:', err);
+      setDbStatus('error');
+      if (window.location.hostname === 'localhost') {
+        enterDemoMode();
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateStatus = async (id: string, wa: string, status: string) => {
+    if (isDemo) {
+      setLeads(prev => prev.map(l => l.whatsapp === wa ? { ...l, status } : l));
+      return;
+    }
+    try {
+      await fetch('/api/leads', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ whatsapp: wa, status })
+      });
+      fetchLeads();
+    } catch (err) {
+      console.error('Error updating status:', err);
+    }
+  };
 
   if (!isAuthenticated) {
     return (
@@ -76,7 +133,7 @@ export const AdminDashboard = () => {
               <ShieldAlert className="text-rose-500" size={32} />
             </div>
             <h2 className="text-[10px] font-black text-white/40 uppercase tracking-[0.6em] mb-4">Security Protocol</h2>
-            <h3 className="text-4xl font-black uppercase italic tracking-tighter text-white">ACESSO <span className="text-rose-500">RESTRITO.</span></h3>
+            <h3 className="text-4xl font-black uppercase italic tracking-tighter text-white text-balance">ACESSO <span className="text-rose-500">RESTRITO.</span></h3>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
@@ -107,46 +164,22 @@ export const AdminDashboard = () => {
             </button>
           </form>
 
-          <p className="mt-12 text-[8px] text-center text-white/10 uppercase tracking-widest font-bold">
+          <div className="mt-8 pt-8 border-t border-white/5 text-center">
+            <button 
+              onClick={enterDemoMode}
+              className="text-[9px] font-black uppercase tracking-[0.3em] text-white/20 hover:text-emerald-500 transition-colors"
+            >
+              ENTRAR EM MODO DEMONSTRATIVO (OFFLINE)
+            </button>
+          </div>
+
+          <p className="mt-8 text-[8px] text-center text-white/10 uppercase tracking-widest font-bold">
             Authorized Personnel Only • Berg Official Platform v2.1
           </p>
         </motion.div>
       </div>
     );
   }
-
-  const fetchLeads = async () => {
-    try {
-      const response = await fetch('/api/leads');
-      if (!response.ok) throw new Error('API unreachable');
-      const data = await response.json();
-      setLeads(Array.isArray(data) ? data : []);
-    } catch (err) {
-      console.error('Error fetching leads:', err);
-      // Fallback a mock data se estiver em dev e falhar
-      if (window.location.hostname === 'localhost') {
-        setLeads([
-          { id: 1, nome: "Berg (Teste)", whatsapp: "(21) 99999-9999", interesse: "ICP: Pressão", status: "Lead", origem: "ICP", created_at: new Date().toISOString(), suggested_remarketing: "Oi Berg!" },
-          { id: 2, nome: "Alliance SP", whatsapp: "(11) 98888-8888", interesse: "Seminário: Passagem", status: "Solicitado", origem: "Seminar", created_at: new Date().toISOString(), suggested_remarketing: "Oi Alliance!", metadata: { local: "São Paulo, SP", data: "Maio/2024", publico: "50+ Alunos" } }
-        ]);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const updateStatus = async (id: string, wa: string, status: string) => {
-    try {
-      await fetch('/api/leads', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ whatsapp: wa, status: status })
-      });
-      fetchLeads(); // Refresh data
-    } catch (err) {
-      console.error('Error updating status:', err);
-    }
-  };
 
   return (
     <div className="flex h-screen bg-[#080808] text-white font-sans overflow-hidden">
@@ -208,10 +241,22 @@ export const AdminDashboard = () => {
             </h2>
           </div>
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
-              <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-[9px] font-bold uppercase tracking-widest text-white/60">Sincronizado</span>
-            </div>
+            {isDemo ? (
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-orange-500/10 rounded-full border border-orange-500/20">
+                <div className="w-1.5 h-1.5 bg-orange-500 rounded-full" />
+                <span className="text-[9px] font-bold uppercase tracking-widest text-orange-500">Modo Demo</span>
+              </div>
+            ) : dbStatus === 'pending' ? (
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-rose-500/10 rounded-full border border-rose-500/20 shadow-[0_0_15px_rgba(244,63,94,0.1)]">
+                <ShieldAlert className="text-rose-500" size={12} />
+                <span className="text-[9px] font-bold uppercase tracking-widest text-rose-500">DB Offline: Configuração Pendente</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">
+                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-500">Live Sync Ativo</span>
+              </div>
+            )}
             <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
               <Shield size={18} className="text-white/20" />
             </div>
