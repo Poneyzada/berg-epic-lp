@@ -354,58 +354,103 @@ const LeadsModule = ({ leads, refresh }: { leads: Lead[], refresh: () => void })
       </div>
 
       <div className="bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="border-b border-white/5">
-              <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-white/20">Status</th>
-              <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-white/20">Lead</th>
-              <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-white/20">Interesse</th>
-              <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-white/20 text-right">Ação</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-white/5">
-            {filteredLeads.length === 0 ? (
-              <tr>
-                <td colSpan={4} className="px-8 py-20 text-center text-white/20 font-black uppercase tracking-[0.3em] text-[10px]">
-                  Nenhum lead encontrado com estes filtros
-                </td>
+        {/* Desktop Table View */}
+        <div className="hidden lg:block overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-white/5">
+                <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-white/20">Status</th>
+                <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-white/20">Lead</th>
+                <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-white/20">Interesse</th>
+                <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-white/20 text-right">Ação</th>
               </tr>
-            ) : (
-              filteredLeads.map((lead) => (
-                <tr key={lead.id} className="group hover:bg-white/5 transition-colors">
-                  <td className="px-8 py-8">
-                    <span className={`px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border ${
-                      lead.status === 'Pago' ? 'bg-emerald-500 text-black border-emerald-500' :
-                      lead.status === 'Abandonado' ? 'bg-rose-500 text-white border-rose-500' :
-                      lead.status === 'No Checkout' ? 'bg-blue-600 text-white border-blue-600' :
-                      'bg-white/10 border-white/20 text-white/60'
-                    }`}>
-                      {lead.status || 'Lead'}
-                    </span>
-                  </td>
-                  <td className="px-8 py-8">
-                    <div className="text-sm font-bold uppercase italic tracking-tighter text-white">{lead.nome}</div>
-                    <div className="text-[10px] text-white/40 font-data tracking-widest">{lead.whatsapp}</div>
-                  </td>
-                  <td className="px-8 py-8">
-                    <div className="text-[11px] font-black uppercase tracking-widest text-white/80">{lead.interesse}</div>
-                    <div className="text-[9px] text-white/20 uppercase tracking-widest">{new Date(lead.created_at).toLocaleDateString('pt-BR')}</div>
-                  </td>
-                  <td className="px-8 py-8 text-right">
-                    <a 
-                      href={`https://wa.me/${lead.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(lead.suggested_remarketing)}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-[9px] font-black uppercase italic tracking-widest hover:bg-[#ff0033] hover:text-white transition-all shadow-xl active:scale-95"
-                    >
-                      Ativar <MessageSquare size={12} />
-                    </a>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {filteredLeads.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="px-8 py-20 text-center text-white/20 font-black uppercase tracking-[0.3em] text-[10px]">
+                    Nenhum lead encontrado com estes filtros
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                filteredLeads.map((lead) => (
+                  <tr key={lead.id} className="group hover:bg-white/5 transition-colors">
+                    <td className="px-8 py-8">
+                      <span className={`px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border ${
+                        lead.status === 'Pago' ? 'bg-emerald-500 text-black border-emerald-500' :
+                        lead.status === 'Abandonado' ? 'bg-rose-500 text-white border-rose-500' :
+                        lead.status === 'No Checkout' ? 'bg-blue-600 text-white border-blue-600' :
+                        'bg-white/10 border-white/20 text-white/60'
+                      }`}>
+                        {lead.status || 'Lead'}
+                      </span>
+                    </td>
+                    <td className="px-8 py-8">
+                      <div className="text-sm font-bold uppercase italic tracking-tighter text-white">{lead.nome}</div>
+                      <div className="text-[10px] text-white/40 font-data tracking-widest">{lead.whatsapp}</div>
+                    </td>
+                    <td className="px-8 py-8">
+                      <div className="text-[11px] font-black uppercase tracking-widest text-white/80">{lead.interesse}</div>
+                      <div className="text-[9px] text-white/20 uppercase tracking-widest">{new Date(lead.created_at).toLocaleDateString('pt-BR')}</div>
+                    </td>
+                    <td className="px-8 py-8 text-right">
+                      <a 
+                        href={`https://wa.me/${lead.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(lead.suggested_remarketing)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-[9px] font-black uppercase italic tracking-widest hover:bg-[#ff0033] hover:text-white transition-all shadow-xl active:scale-95"
+                      >
+                        Ativar <MessageSquare size={12} />
+                      </a>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile Card View */}
+        <div className="lg:hidden divide-y divide-white/5">
+          {filteredLeads.length === 0 ? (
+            <div className="px-8 py-20 text-center text-white/20 font-black uppercase tracking-[0.3em] text-[10px]">
+              Nenhum lead encontrado
+            </div>
+          ) : (
+            filteredLeads.map((lead) => (
+              <div key={lead.id} className="p-8 space-y-6">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <div className="text-lg font-black uppercase italic tracking-tighter text-white mb-1">{lead.nome}</div>
+                    <div className="text-[10px] text-white/40 font-data tracking-widest">{lead.whatsapp}</div>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border ${
+                    lead.status === 'Pago' ? 'bg-emerald-500 text-black border-emerald-500' :
+                    lead.status === 'Abandonado' ? 'bg-rose-500 text-white border-rose-500' :
+                    lead.status === 'No Checkout' ? 'bg-blue-600 text-white border-blue-600' :
+                    'bg-white/10 border-white/20 text-white/60'
+                  }`}>
+                    {lead.status || 'Lead'}
+                  </span>
+                </div>
+                
+                <div>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-1">Interesse</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-white/80">{lead.interesse}</div>
+                </div>
+
+                <a 
+                  href={`https://wa.me/${lead.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(lead.suggested_remarketing)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full flex items-center justify-center gap-3 py-5 bg-white text-black rounded-2xl text-[10px] font-black uppercase italic tracking-tighter shadow-2xl active:scale-95 transition-all"
+                >
+                  ACESSAR VIA WHATSAPP <MessageSquare size={14} />
+                </a>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
