@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
+// v2.1.0-recovery-center-live
 import { Hero } from './components/Hero';
 import { SmartFilter } from './components/SmartFilter';
 import { Courses } from './components/Courses';

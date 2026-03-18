@@ -51,9 +51,12 @@ export const Footer = () => {
           <p className="text-[9px] uppercase font-black tracking-[0.3em] text-white/50">
             {t('footer.rights')}
           </p>
-          <div className="flex items-center gap-4 grayscale opacity-20 hover:opacity-100 transition-opacity">
-             <span className="text-[8px] uppercase font-black tracking-widest text-white/60">DESIGN & DEV</span>
-             <span className="text-xs font-black tracking-tighter hover:text-white transition-colors cursor-default">TRÍADE STUDIO</span>
+          <div className="flex items-center gap-8 grayscale opacity-20 hover:opacity-100 transition-all">
+             <a href="#admin" className="text-[8px] uppercase font-black tracking-widest text-white/40 hover:text-white transition-colors">Acesso Admin</a>
+             <div className="flex items-center gap-4">
+                <span className="text-[8px] uppercase font-black tracking-widest text-white/60">DESIGN & DEV</span>
+                <span className="text-xs font-black tracking-tighter hover:text-white transition-colors cursor-default">TRÍADE STUDIO</span>
+             </div>
           </div>
         </div>
       </div>
