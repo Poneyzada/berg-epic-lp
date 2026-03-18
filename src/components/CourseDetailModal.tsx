@@ -162,6 +162,16 @@ export const CourseDetailModal = ({ isOpen, onClose, course }: CourseDetailModal
                     href={course.checkout}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => {
+                        const wa = localStorage.getItem('last_lead_wa');
+                        if (wa) {
+                          fetch('/api/leads', {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ whatsapp: wa, status: 'No Checkout' })
+                          });
+                        }
+                    }}
                     className="shimmer-btn relative px-8 py-4 md:px-12 md:py-5 bg-white text-black font-black uppercase italic tracking-tighter hover:bg-white/90 transition-all rounded-full flex items-center justify-center gap-4 shadow-[0_20px_40px_rgba(255,255,255,0.1)] group overflow-hidden"
                   >
                     <span className="relative z-10 text-sm md:text-base">Começar Agora</span>

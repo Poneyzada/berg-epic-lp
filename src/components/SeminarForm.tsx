@@ -16,7 +16,6 @@ export const SeminarForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Send to Backend
     try {
       await fetch('/api/leads', {
         method: 'POST',
@@ -33,6 +32,7 @@ export const SeminarForm = () => {
           }
         })
       });
+      localStorage.setItem('last_lead_wa', formData.whatsapp);
     } catch (err) {
       console.error('Erro ao salvar lead:', err);
     }

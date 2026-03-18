@@ -97,6 +97,7 @@ export const SmartFilter = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
       console.error('Erro ao salvar lead:', err);
     }
 
+    localStorage.setItem('last_lead_wa', leadInfo.whatsapp);
     setShowLeadForm(false);
     setShowResult(true);
   };
@@ -226,7 +227,22 @@ export const SmartFilter = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                       </p>
                       
                       <div className="flex flex-col items-center justify-center gap-6">
-                        <a href={result.link} className="btn-magnetic btn-primary w-full text-center py-4 bg-white text-black rounded-full font-black uppercase italic text-sm">
+                        <a 
+                          href={result.link} 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => {
+                            const wa = leadInfo.whatsapp || localStorage.getItem('last_lead_wa');
+                            if (wa) {
+                              fetch('/api/leads', {
+                                method: 'PUT',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ whatsapp: wa, status: 'No Checkout' })
+                              });
+                            }
+                          }}
+                          className="btn-magnetic btn-primary w-full text-center py-4 bg-white text-black rounded-full font-black uppercase italic text-sm"
+                        >
                           Acessar Conteúdo
                         </a>
                         <div className="flex items-center gap-4">
