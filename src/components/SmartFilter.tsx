@@ -24,27 +24,48 @@ const questions = [
 ];
 
 const recommendations = {
-  pass: {
+  'pass-white': {
     title: 'Single Leg X: Conceitos',
-    desc: 'O protocolo base para dominar a guarda e as raspagens modernas.',
+    desc: 'O protocolo base para dominar a guarda e as raspagens modernas, ideal para quem está construindo a base.',
     link: 'https://sun.eduzz.com/1441320?cupom=SLE100'
   },
-  sub: {
+  'pass-purple': {
     title: 'Pressão faz Diamantes',
-    desc: 'A metodologia definitiva de controle deadweight e passagens de pressão.',
+    desc: 'A metodologia definitiva de controle deadweight e passagens de pressão para avançados.',
     link: 'https://sun.eduzz.com/1818927'
   },
-  comp: {
+  'sub-all': {
+    title: 'A Arte da Finalização',
+    desc: 'Como ajustar e concluir ataques com 100% de eficiência mecânica.',
+    link: 'https://sun.eduzz.com/1818927'
+  },
+  'base-all': {
+    title: 'Conexão Inabalável',
+    desc: 'Domine o equilíbrio e a distribuição de peso para nunca mais ser raspado.',
+    link: 'https://sun.eduzz.com/1351752'
+  },
+  'comp-all': {
     title: 'Anulando a 50/50 & Lapelas',
-    desc: 'O nível avançado para neutralizar amarrações e sobrar tecnicamente.',
+    desc: 'O nível avançado para neutralizar amarrações e sobrar tecnicamente em torneios.',
     link: 'https://sun.eduzz.com/1351752'
   }
+};
+
+const getRecommendation = (goal: string, level: string) => {
+  if (goal === 'pass') {
+    return level === 'white' ? recommendations['pass-white'] : recommendations['pass-purple'];
+  }
+  if (goal === 'sub') return recommendations['sub-all'];
+  if (goal === 'base') return recommendations['base-all'];
+  return recommendations['comp-all'];
 };
 
 export const SmartFilter = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [showLeadForm, setShowLeadForm] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [leadInfo, setLeadInfo] = useState({ nome: '', whatsapp: '' });
 
   const handleAnswer = (questionId: string, answerId: string) => {
     const newAnswers = { ...answers, [questionId]: answerId };
@@ -52,11 +73,35 @@ export const SmartFilter = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
-      setShowResult(true);
+      setShowLeadForm(true);
     }
   };
 
-  const result = recommendations[answers.goal as keyof typeof recommendations] || recommendations.comp;
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Send to Python Backend
+    try {
+      await fetch('http://localhost:8000/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: leadInfo.nome,
+          whatsapp: leadInfo.whatsapp,
+          interesse: result.title,
+          origem: 'ICP',
+          metadata: { ...answers }
+        })
+      });
+    } catch (err) {
+      console.error('Erro ao salvar lead:', err);
+    }
+
+    setShowLeadForm(false);
+    setShowResult(true);
+  };
+
+  const result = getRecommendation(answers.goal, answers.level);
 
   return (
     <AnimatePresence>
@@ -87,7 +132,7 @@ export const SmartFilter = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
             <div className="p-8 md:p-16">
               <div className="relative overflow-hidden">
                 <AnimatePresence mode="wait">
-                  {!showResult ? (
+                  {!showLeadForm && !showResult ? (
                     <motion.div
                       key={step}
                       initial={{ opacity: 0, y: 10 }}
@@ -118,6 +163,47 @@ export const SmartFilter = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                         ))}
                       </div>
                     </motion.div>
+                  ) : showLeadForm ? (
+                    <motion.div
+                      key="lead-form"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="relative z-10"
+                    >
+                      <div className="text-center mb-8">
+                         <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <CheckCircle className="w-6 h-6 text-white" />
+                         </div>
+                         <h3 className="text-2xl font-black uppercase italic tracking-tighter">LIBERAR PROTOCOLO.</h3>
+                         <p className="text-white/40 text-[10px] uppercase tracking-widest mt-2">Informe para onde enviamos seu estudo clínico.</p>
+                      </div>
+
+                      <form onSubmit={handleLeadSubmit} className="space-y-4">
+                        <input 
+                          required
+                          type="text" 
+                          placeholder="SEU NOME"
+                          value={leadInfo.nome}
+                          onChange={(e) => setLeadInfo({...leadInfo, nome: e.target.value})}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:border-white/40 outline-none transition-all font-data text-white text-xs"
+                        />
+                        <input 
+                          required
+                          type="tel" 
+                          placeholder="SEU WHATSAPP"
+                          value={leadInfo.whatsapp}
+                          onChange={(e) => setLeadInfo({...leadInfo, whatsapp: e.target.value})}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:border-white/40 outline-none transition-all font-data text-white text-xs"
+                        />
+                        <button 
+                          type="submit"
+                          className="w-full py-5 bg-white text-black font-black uppercase italic tracking-tighter hover:bg-white/90 transition-all rounded-full flex items-center justify-center gap-3 mt-4"
+                        >
+                          <span>VER MEU PROTOCOLO</span>
+                          <ChevronRight size={16} />
+                        </button>
+                      </form>
+                    </motion.div>
                   ) : (
                     <motion.div
                       key="result"
@@ -132,24 +218,38 @@ export const SmartFilter = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                       <h3 className="text-3xl md:text-5xl font-black uppercase italic mb-6 leading-none">
                         {result.title}
                       </h3>
-                      <p className="text-white/40 text-[10px] uppercase tracking-widest mb-12 max-w-sm mx-auto leading-relaxed">
+                      <p className="text-white/40 text-[10px] uppercase tracking-widest mb-4 max-w-sm mx-auto leading-relaxed">
                          {result.desc}
+                      </p>
+                      <p className="text-[8px] text-white/20 uppercase tracking-widest mb-12 italic">
+                        Análise baseada no seu gap em {answers.goal === 'pass' ? 'PASSAGEM' : answers.goal === 'sub' ? 'FINALIZAÇÃO' : 'BASE'} e nível {answers.level === 'white' ? 'INICIANTE' : 'AVANÇADO'}.
                       </p>
                       
                       <div className="flex flex-col items-center justify-center gap-6">
-                        <a href={result.link} className="btn-magnetic btn-primary w-full text-center">
+                        <a href={result.link} className="btn-magnetic btn-primary w-full text-center py-4 bg-white text-black rounded-full font-black uppercase italic text-sm">
                           Acessar Conteúdo
                         </a>
-                        <button 
-                          onClick={() => {
-                            setStep(0);
-                            setShowResult(false);
-                          }}
-                          className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/20 hover:text-white transition-colors"
-                        >
-                          <RefreshCcw className="w-3 h-3" />
-                          Reiniciar Protocolo
-                        </button>
+                        <div className="flex items-center gap-4">
+                          <button 
+                            onClick={() => {
+                              setStep(0);
+                              setShowResult(false);
+                              setShowLeadForm(false);
+                            }}
+                            className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/20 hover:text-white transition-colors"
+                          >
+                            <RefreshCcw className="w-3 h-3" />
+                            Refazer Teste
+                          </button>
+                          <a 
+                            href="#courses" 
+                            onClick={onClose}
+                            className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/20 hover:text-white transition-colors border-l border-white/10 pl-4"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            Ver todos os Cursos
+                          </a>
+                        </div>
                       </div>
                     </motion.div>
                   )}

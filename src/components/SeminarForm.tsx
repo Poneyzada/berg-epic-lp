@@ -13,9 +13,30 @@ export const SeminarForm = () => {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Send to Backend
+    try {
+      await fetch('http://localhost:8000/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: formData.nome,
+          whatsapp: formData.whatsapp,
+          interesse: `Seminário: ${formData.foco}`,
+          origem: 'Seminar',
+          metadata: {
+            local: formData.local,
+            publico: formData.publico,
+            data: formData.data
+          }
+        })
+      });
+    } catch (err) {
+      console.error('Erro ao salvar lead:', err);
+    }
+
     const message = `Olá Berg! Gostaria de agendar um seminário oficial.
 Nome do Organizador/Academia: ${formData.nome}
 Localização do Evento: ${formData.local}

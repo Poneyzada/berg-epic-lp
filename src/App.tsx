@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { SmartFilter } from './components/SmartFilter';
@@ -10,8 +10,21 @@ import { Philosophy, ProtocolStack } from './components/NarrativeSections';
 import { Footer } from './components/Footer';
 import { SeminarModal } from './components/SeminarModal';
 
+import { AdminDashboard } from './components/AdminDashboard';
+
 function App() {
   const [modalType, setModalType] = useState<'filter' | 'seminar' | null>(null);
+  const [isAdmin, setIsAdmin] = useState(window.location.hash === '#admin');
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setIsAdmin(window.location.hash === '#admin');
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  if (isAdmin) return <AdminDashboard />;
 
   return (
     <div className="bg-[#0D0D12] min-h-screen text-white font-sans selection:bg-white selection:text-black">
