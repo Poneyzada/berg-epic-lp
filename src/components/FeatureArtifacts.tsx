@@ -24,31 +24,22 @@ export const DiagnosticShuffler = () => {
   }, []);
 
   return (
-    <div className="relative h-48 w-full flex items-center justify-center perspective-1000">
+    <div className="relative w-full grid grid-cols-1 gap-4">
       {items.map((item, index) => (
-        <motion.div
+        <div
            key={item.id}
-           layout
-           initial={false}
-           animate={{
-             y: index * -15,
-             scale: 1 - index * 0.05,
-             zIndex: items.length - index,
-             opacity: 1 - index * 0.3,
-           }}
-           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-           className="absolute w-full bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-xl"
+           className="w-full bg-white/5 border border-white/10 p-4 rounded-xl backdrop-blur-sm"
         >
           <div className="flex items-center gap-4">
-             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                <Target size={18} className="text-white" />
+             <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                <Target size={14} className="text-white" />
              </div>
              <div>
-               <div className="text-[10px] font-data text-white/30 uppercase tracking-widest">{item.subtitle}</div>
-               <div className="text-sm font-bold uppercase">{item.title}</div>
+               <div className="text-[8px] font-data text-white/30 uppercase tracking-widest">{item.subtitle}</div>
+               <div className="text-xs font-bold uppercase">{item.title}</div>
              </div>
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

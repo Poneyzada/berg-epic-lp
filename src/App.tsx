@@ -21,7 +21,7 @@ function App() {
       />
       
       <main>
-        <Hero />
+        <Hero onAction={() => setModalType('filter')} />
         <Philosophy />
         <ProtocolStack onAction={(type) => setModalType(type)} />
         <Courses />

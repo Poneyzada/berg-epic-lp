@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const Hero = () => {
+export const Hero = ({ onAction }: { onAction: () => void }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
@@ -64,13 +64,13 @@ export const Hero = () => {
           </p>
           
           <div className="hero-line flex flex-col md:flex-row gap-4 md:gap-6">
-            <a 
-              href="#courses"
-              className="px-8 py-4 md:px-10 md:py-5 bg-white text-black font-black uppercase italic tracking-tighter hover:bg-white/90 transition-all rounded-full flex items-center justify-center gap-3 text-sm md:text-base"
+            <button 
+              onClick={onAction}
+              className="px-8 py-4 md:px-10 md:py-5 bg-white text-black font-black uppercase italic tracking-tighter hover:bg-white/90 transition-all rounded-full flex items-center justify-center gap-3 text-sm md:text-base cursor-pointer"
             >
               <span>{t('hero.cta')}</span>
               <ChevronRight size={18} />
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -58,7 +58,7 @@ export const Philosophy = () => {
         >
           <source src="/videos/berg-adidas.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-md" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
       
       <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -96,20 +96,15 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
       const cards = gsap.utils.toArray('.protocol-card');
       
       cards.forEach((card: any, i) => {
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top top',
-          end: '+=100%', 
-          pin: true,
-          pinSpacing: false, 
-          onUpdate: (self) => {
-            const progress = self.progress;
-            const exitProgress = Math.max(0, (progress - 0.5) * 2); 
-            gsap.set(card, {
-              scale: 1 - exitProgress * 0.03,
-              opacity: 1 - exitProgress * 0.8,
-              filter: `blur(${exitProgress * (isMobile ? 5 : 10)}px)`
-            });
+        gsap.from(card, {
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
           }
         });
       });
@@ -132,7 +127,7 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
         {steps.map((step, i) => (
           <div 
             key={i} 
-            className="protocol-card glass-card min-h-screen mb-[80vh] p-12 md:p-32 flex flex-col md:flex-row gap-20 items-center relative overflow-hidden group border-white/5"
+            className="protocol-card glass-card mb-20 p-12 md:p-32 flex flex-col md:flex-row gap-20 items-center relative overflow-hidden group border-white/5"
           >
             {/* Background Video */}
             <div className="absolute inset-0 z-0 opacity-20 pointer-events-none group-hover:opacity-40 transition-opacity duration-1000">
@@ -154,12 +149,12 @@ export const ProtocolStack = ({ onAction }: { onAction: (type: 'filter' | 'semin
                   {step.desc}
                 </p>
                 <div className="mb-16">
-                   <a 
-                     href={stepTargets[i]}
-                     className="inline-block px-6 py-3 border border-white/50 hover:border-white text-[9px] font-bold uppercase tracking-[0.4em] text-white transition-all rounded-full"
+                   <button 
+                     onClick={() => onAction('filter')}
+                     className="inline-block px-6 py-3 border border-white/50 hover:border-white text-[9px] font-bold uppercase tracking-[0.4em] text-white transition-all rounded-full cursor-pointer"
                    >
                      {step.cta}
-                   </a>
+                   </button>
                 </div>
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-px bg-white/20" />
